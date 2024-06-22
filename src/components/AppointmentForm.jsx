@@ -1,51 +1,61 @@
-// Importazioni necessarie per il componente
 import React, { useState, useEffect } from "react";
 
 const AppointmentForm = () => {
-  // Stati locali per memorizzare i dati
   const [barbers, setBarbers] = useState([]);
   const [selectedBarber, setSelectedBarber] = useState(null);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [csrfToken, setCsrfToken] = useState("");
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-  // Effetti per recuperare i parrucchieri e il token CSRF all'avvio del componente
+  const times = [
+    "08:30",
+    "09:30",
+    "10:30",
+    "11:30",
+    "12:30",
+    "15:30",
+    "16:30",
+    "17:30",
+    "18:30",
+    "19:30",
+  ];
+
   useEffect(() => {
     fetchBarbers();
     fetchCSRFToken();
   }, []);
 
-  // Funzione per recuperare i parrucchieri dal server
   const fetchBarbers = async () => {
     try {
       const response = await fetch("http://localhost:8000/barbers");
       const data = await response.json();
-      setBarbers(data); // Imposta lo stato 'barbers' con i dati recuperati
+      setBarbers(data);
     } catch (error) {
       console.error("Errore nel recupero dei parrucchieri:", error.message);
     }
   };
 
-  // Funzione per recuperare il token CSRF dal server
   const fetchCSRFToken = async () => {
     try {
       const response = await fetch("http://localhost:8000/csrf-token", {
         credentials: "include",
       });
       const data = await response.json();
-      setCsrfToken(data.csrfToken); // Imposta lo stato 'csrfToken' con il token recuperato
+      setCsrfToken(data.csrfToken);
     } catch (error) {
       console.error("Errore nel recupero del token CSRF:", error.message);
     }
   };
 
-  // Funzione per gestire l'invio del modulo
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Previene il comportamento predefinito del form
+    e.preventDefault();
 
     const newAppointment = {
-      user_id: 1, // Assumendo che l'ID dell'utente sia 1 per test, da sostituire con l'ID dell'utente corrente
+      user_id: 1,
       barber_id: selectedBarber.id,
+      name: selectedBarber.name,
       date,
       time,
     };
@@ -68,7 +78,6 @@ const AppointmentForm = () => {
       const result = await response.json();
       console.log("Appuntamento creato con successo:", result);
 
-      // Resetta i campi del form dopo la prenotazione
       setSelectedBarber(null);
       setDate("");
       setTime("");
@@ -76,6 +85,56 @@ const AppointmentForm = () => {
       console.error("Errore durante la prenotazione:", error.message);
     }
   };
+
+  const generateDaysOfMonth = (month, year) => {
+    const currentDate = new Date();
+    const date = new Date(year, month, 1);
+    const days = [];
+
+    while (date.getMonth() === month) {
+      const day = date.getDay();
+      if (day >= 2 && day <= 6 && date >= currentDate) {
+        // Dal martedì al sabato e giorni futuri
+        const dateString = date.toISOString().split("T")[0];
+        days.push({
+          date: dateString,
+          display: date.toLocaleDateString("it-IT", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+          }),
+        });
+      }
+      date.setDate(date.getDate() + 1);
+    }
+
+    return days;
+  };
+
+  const handleMonthChange = (direction) => {
+    let newMonth = currentMonth + direction;
+    let newYear = currentYear;
+
+    if (newMonth < 0) {
+      newMonth = 11;
+      newYear -= 1;
+    } else if (newMonth > 11) {
+      newMonth = 0;
+      newYear += 1;
+    }
+
+    setCurrentMonth(newMonth);
+    setCurrentYear(newYear);
+  };
+
+  const handleDayClick = (selectedDate) => {
+    // Incrementa di un giorno la data selezionata
+    const nextDay = new Date(selectedDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+    setDate(nextDay.toISOString().split("T")[0]);
+  };
+
+  const daysOfMonth = generateDaysOfMonth(currentMonth, currentYear);
 
   return (
     <div className="container">
@@ -91,34 +150,73 @@ const AppointmentForm = () => {
               className="form-control"
               id="barberName"
               value={selectedBarber.name}
-              disabled // Campo disabilitato perché mostra solo informazioni
+              disabled
             />
           </div>
           <div className="mb-3">
             <label htmlFor="dateInput" className="form-label">
               Data dell'Appuntamento
             </label>
-            <input
-              type="date"
-              className="form-control"
-              id="dateInput"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required // Rende il campo obbligatorio
-            />
+            <div className="d-flex">
+              <button
+                type="button"
+                className="btn btn-secondary me-2"
+                onClick={() => handleMonthChange(-1)}
+                disabled={
+                  currentMonth === 0 && currentYear === new Date().getFullYear()
+                }
+              >
+                Mese Precedente
+              </button>
+              <input
+                type="text"
+                className="form-control"
+                id="dateInput"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                readOnly
+              />
+              <button
+                type="button"
+                className="btn btn-secondary ms-2"
+                onClick={() => handleMonthChange(1)}
+              >
+                Mese Successivo
+              </button>
+            </div>
+            <div className="d-flex flex-wrap mt-2">
+              {daysOfMonth.map((day) => (
+                <button
+                  type="button"
+                  key={day.date}
+                  className={`btn btn-outline-primary m-1 ${
+                    date === day.date ? "active" : ""
+                  }`}
+                  onClick={() => handleDayClick(day.date)}
+                >
+                  {day.display}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="mb-3">
             <label htmlFor="timeInput" className="form-label">
               Ora dell'Appuntamento
             </label>
-            <input
-              type="time"
+            <select
               className="form-control"
               id="timeInput"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              required // Rende il campo obbligatorio
-            />
+              required
+            >
+              <option value="">Seleziona un orario</option>
+              {times.map((timeSlot) => (
+                <option key={timeSlot} value={timeSlot}>
+                  {timeSlot}
+                </option>
+              ))}
+            </select>
           </div>
           <button type="submit" className="btn btn-primary">
             Prenota
@@ -141,7 +239,7 @@ const AppointmentForm = () => {
                   <p className="card-text">{barber.description}</p>
                   <button
                     className="btn btn-primary"
-                    onClick={() => setSelectedBarber(barber)} // Imposta il parrucchiere selezionato
+                    onClick={() => setSelectedBarber(barber)}
                   >
                     Prenota con {barber.name}
                   </button>
