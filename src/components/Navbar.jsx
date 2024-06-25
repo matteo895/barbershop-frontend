@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const user = JSON.parse(localStorage.getItem("user")); // Controlla se l'utente è loggato
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -32,18 +34,18 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/UserProfile">
-                Profilo
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/AppointmentList">
                 Lista
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/Backoffice">
+              <Link className="nav-link" to="/BackOffice">
                 BACKOFFICE
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/UserProfile">
+                Account
               </Link>
             </li>
           </ul>

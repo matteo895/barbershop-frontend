@@ -123,7 +123,7 @@ const BackOffice = () => {
                 <h5 className="card-title">{barber.name}</h5>
                 <p className="card-text">{barber.description}</p>
                 <button
-                  className="btn btn-primary mr-2"
+                  className="btn btn-primary "
                   onClick={() => startEditing(barber)}
                 >
                   Modifica
