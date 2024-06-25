@@ -1,38 +1,44 @@
-// Register.js
-
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
 const Register = () => {
+  // Stati per gestire i dati del form e il reindirizzamento
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirectToDashboard, setRedirectToDashboard] = useState(false);
 
+  // Funzione per gestire la registrazione dell'utente
   const handleRegister = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Impedisce il comportamento predefinito del submit del form
     try {
+      // Chiamata API per registrare l'utente
       const response = await fetch("/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password }), // Dati da inviare al server
       });
       if (response.ok) {
+        // Se la registrazione va a buon fine, reindirizza alla dashboard
         setRedirectToDashboard(true);
       } else {
+        // Gestione errore nel caso la registrazione fallisca
         console.error("Registration failed");
       }
     } catch (error) {
+      // Gestione errore nel caso di problemi di rete o altri errori
       console.error("Registration failed", error);
     }
   };
 
+  // Se redirectToDashboard è true, reindirizza alla dashboard
   if (redirectToDashboard) {
     return <Redirect to="/dashboard" />;
   }
 
+  // Renderizza il form di registrazione
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
