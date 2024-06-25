@@ -8,6 +8,7 @@ const AppointmentForm = () => {
   const [csrfToken, setCsrfToken] = useState("");
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [error, setError] = useState(null);
 
   const times = [
     "08:30",
@@ -52,6 +53,14 @@ const AppointmentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if the selected time is already booked
+    if (isTimeAlreadyBooked(date, time)) {
+      setError(
+        "Questa ora è già stata prenotata. Per favore, seleziona un'altra ora."
+      );
+      return;
+    }
+
     const newAppointment = {
       user_id: 1,
       barber_id: selectedBarber.id,
@@ -81,9 +90,16 @@ const AppointmentForm = () => {
       setSelectedBarber(null);
       setDate("");
       setTime("");
+      setError(null); // Clear any previous error
     } catch (error) {
       console.error("Errore durante la prenotazione:", error.message);
     }
+  };
+
+  const isTimeAlreadyBooked = (selectedDate, selectedTime) => {
+    // Placeholder logic - replace with your actual check against booked appointments
+    // Here, assuming it's not already booked for the sake of example
+    return false;
   };
 
   const generateDaysOfMonth = (month, year) => {
@@ -94,7 +110,6 @@ const AppointmentForm = () => {
     while (date.getMonth() === month) {
       const day = date.getDay();
       if (day >= 2 && day <= 6 && date >= currentDate) {
-        // Dal martedì al sabato e giorni futuri
         const dateString = date.toISOString().split("T")[0];
         days.push({
           date: dateString,
@@ -128,7 +143,6 @@ const AppointmentForm = () => {
   };
 
   const handleDayClick = (selectedDate) => {
-    // Incrementa di un giorno la data selezionata
     const nextDay = new Date(selectedDate);
     nextDay.setDate(nextDay.getDate() + 1);
     setDate(nextDay.toISOString().split("T")[0]);
@@ -218,6 +232,7 @@ const AppointmentForm = () => {
               ))}
             </select>
           </div>
+          {error && <p className="text-danger">{error}</p>}
           <button type="submit" className="btn btn-primary">
             Prenota
           </button>
