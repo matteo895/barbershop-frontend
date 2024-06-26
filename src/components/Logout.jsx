@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Logout = () => {
   // Effetto che viene eseguito una sola volta al montaggio del componente
@@ -22,7 +22,7 @@ const Logout = () => {
   }, []); // Array vuoto come dipendenza per eseguire l'effetto solo al montaggio del componente
 
   // Reindirizzamento alla homepage dopo il logout
-  return <Redirect to="/" />;
+  return <Navigate to="/" />;
 };
 
 export default Logout;

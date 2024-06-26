@@ -1,44 +1,32 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 
 const Login = () => {
-  // Stati per gestire l'email, la password e il reindirizzamento alla dashboard
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectToDashboard, setRedirectToDashboard] = useState(false);
 
-  // Funzione per gestire il login dell'utente
   const handleLogin = async (e) => {
-    e.preventDefault(); // Evita il comportamento predefinito del form
+    e.preventDefault(); // Evita il comportamento predefinito del submit del form
 
     try {
-      const response = await fetch("/login", {
+      const response = await fetch("http://localhost:8000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }), // Invia le credenziali come JSON
+        body: JSON.stringify({ email, password }), // Invia le credenziali come JSON nel corpo della richiesta
       });
 
       if (response.ok) {
-        // Se la risposta è positiva, reindirizza alla dashboard
-        setRedirectToDashboard(true);
+        // Se il login è avvenuto con successo, reindirizza alla homepage di React
+        window.location.href = "/"; // Reindirizzamento alla homepage di React
       } else {
-        // Se il login fallisce, gestisci l'errore
         console.error("Login failed");
       }
     } catch (error) {
-      // Se si verifica un errore durante il login, gestiscilo
       console.error("Login failed", error);
     }
   };
 
-  // Se redirectToDashboard è true, reindirizza l'utente alla dashboard
-  if (redirectToDashboard) {
-    return <Redirect to="/dashboard" />;
-  }
-
-  // Renderizza il form di login
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">

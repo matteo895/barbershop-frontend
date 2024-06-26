@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const ResetPassword = () => {
   // Stato per gestire l'email inserita dall'utente
   const [email, setEmail] = useState("");
   // Stato per gestire il reindirizzamento alla pagina di login dopo il reset della password
-  const [redirectToLogin, setRedirectToLogin] = useState(false);
+  const [navigateToLogin, setNavigateToLogin] = useState(false);
 
   // Funzione per gestire il reset della password
   const handleResetPassword = async (e) => {
@@ -21,7 +21,7 @@ const ResetPassword = () => {
       });
       if (response.ok) {
         // Se la richiesta va a buon fine, reindirizza alla pagina di login
-        setRedirectToLogin(true);
+        setNavigateToLogin(true);
       } else {
         // Gestione errore nel caso la richiesta fallisca
         console.error("Reset password request failed");
@@ -33,8 +33,8 @@ const ResetPassword = () => {
   };
 
   // Se redirectToLogin è true, reindirizza alla pagina di login
-  if (redirectToLogin) {
-    return <Redirect to="/login" />;
+  if (navigateToLogin) {
+    return <Navigate to="/login" />;
   }
 
   // Renderizza il form per il reset della password

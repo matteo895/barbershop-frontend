@@ -1,41 +1,61 @@
-import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 const Register = () => {
-  // Stati per gestire i dati del form e il reindirizzamento
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [redirectToDashboard, setRedirectToDashboard] = useState(false);
+  // Stati per gestire i campi del form di registrazione e il reindirizzamento
+  const [name, setName] = useState(""); // Nome dell'utente
+  const [email, setEmail] = useState(""); // Email dell'utente
+  const [password, setPassword] = useState(""); // Password dell'utente
+  const [navigateToLogin, setNavigateToLogin] = useState(false); // Flag per reindirizzare alla pagina di login dopo la registrazione
+  const [csrfToken, setCSRFToken] = useState(""); // CSRF token per la sicurezza delle richieste
+
+  // useEffect per recuperare il CSRF token al caricamento del componente
+  useEffect(() => {
+    const fetchCSRFToken = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/csrf-token");
+        const data = await response.json();
+        if (response.ok) {
+          setCSRFToken(data.csrfToken); // Imposta il CSRF token nello stato
+        } else {
+          throw new Error("Failed to fetch CSRF token");
+        }
+      } catch (error) {
+        console.error("Error fetching CSRF token:", error);
+      }
+    };
+    fetchCSRFToken(); // Esegue la funzione fetchCSRFToken al montaggio del componente
+  }, []);
 
   // Funzione per gestire la registrazione dell'utente
   const handleRegister = async (e) => {
-    e.preventDefault(); // Impedisce il comportamento predefinito del submit del form
+    e.preventDefault(); // Evita il comportamento predefinito del submit del form
+
     try {
-      // Chiamata API per registrare l'utente
-      const response = await fetch("/register", {
+      // Esegue una richiesta POST al server per registrare l'utente
+      const response = await fetch("http://localhost:3000/register", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", // Tipo di contenuto della richiesta
+          "X-CSRF-TOKEN": csrfToken, // CSRF token per la sicurezza della richiesta
         },
-        body: JSON.stringify({ name, email, password }), // Dati da inviare al server
+        body: JSON.stringify({ name, email, password }), // Dati del form in formato JSON
       });
+
+      // Se la registrazione è avvenuta con successo, imposta il reindirizzamento alla pagina di login
       if (response.ok) {
-        // Se la registrazione va a buon fine, reindirizza alla dashboard
-        setRedirectToDashboard(true);
+        setNavigateToLogin(true);
       } else {
-        // Gestione errore nel caso la registrazione fallisca
-        console.error("Registration failed");
+        console.error("Registration failed"); // Se la registrazione non è riuscita, logga l'errore
       }
     } catch (error) {
-      // Gestione errore nel caso di problemi di rete o altri errori
-      console.error("Registration failed", error);
+      console.error("Registration failed", error); // Se si verifica un errore durante la richiesta, logga l'errore
     }
   };
 
-  // Se redirectToDashboard è true, reindirizza alla dashboard
-  if (redirectToDashboard) {
-    return <Redirect to="/dashboard" />;
+  // Se navigateToLogin è true, reindirizza alla pagina di login usando Navigate di react-router-dom
+  if (navigateToLogin) {
+    return <Navigate to="/login" />;
   }
 
   // Renderizza il form di registrazione

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const UserProfile = () => {
-  // Stato locale per memorizzare le informazioni dell'utente
-  const [user, setUser] = useState(null);
+  // Stati per gestire il profilo utente e gli errori
+  const [user, setUser] = useState(null); // Contiene i dati del profilo utente
+  const [error, setError] = useState(null); // Contiene eventuali errori durante il recupero dei dati
 
-  // Effetto che viene eseguito una sola volta al caricamento del componente
+  // useEffect per eseguire il fetch del profilo utente al caricamento del componente
   useEffect(() => {
-    // Funzione asincrona per recuperare il profilo dell'utente
     const fetchUserProfile = async () => {
       try {
-        // Chiamata API per ottenere i dati del profilo utente
+        // Esegue una richiesta GET al server per recuperare il profilo utente
         const response = await fetch("/UserProfile", {
           method: "GET",
           headers: {
@@ -17,56 +17,70 @@ const UserProfile = () => {
           },
         });
 
-        // Se la risposta è OK (codice 200), ottieni i dati dell'utente
+        // Se la risposta è positiva (status code 200)
         if (response.ok) {
-          const userData = await response.json();
-          setUser(userData); // Aggiorna lo stato locale con i dati dell'utente
+          // Controlla il tipo di contenuto della risposta
+          const contentType = response.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            // Se il tipo di contenuto è JSON, ottiene i dati e li imposta nello stato
+            const userData = await response.json();
+            setUser(userData);
+          } else {
+            // Se il tipo di contenuto non è JSON, gestisce l'errore
+            setError("Unexpected content type");
+            console.error("Unexpected content type:", contentType);
+          }
         } else {
-          // Gestisci la risposta di errore (gestione personalizzata)
+          // Se la richiesta non è andata a buon fine, gestisce l'errore
+          setError("Failed to fetch user profile");
           console.error("Failed to fetch user profile");
         }
       } catch (error) {
-        // Gestisci gli errori di rete o altri errori durante la richiesta
+        // Se si verifica un errore durante la richiesta, gestisce l'errore
+        setError("Failed to fetch user profile");
         console.error("Failed to fetch user profile", error);
       }
     };
 
-    // Chiamata alla funzione per recuperare il profilo dell'utente
-    fetchUserProfile();
-  }, []); // Array vuoto come dipendenza per eseguire l'effetto solo al mount del componente
+    fetchUserProfile(); // Esegue la funzione fetchUserProfile al caricamento del componente
+  }, []); // Array vuoto come dipendenza per eseguire solo al mount del componente
 
   // Funzione per gestire l'aggiornamento del profilo utente
   const handleUpdateProfile = async (updatedProfile) => {
     try {
-      // Chiamata API per aggiornare il profilo utente tramite PATCH
+      // Esegue una richiesta PATCH al server per aggiornare il profilo utente
       const response = await fetch("/UserProfile", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedProfile), // Corpo della richiesta con i dati aggiornati
+        body: JSON.stringify(updatedProfile), // Invia i nuovi dati del profilo in formato JSON
       });
 
-      // Se la risposta è OK (codice 200), logga il successo
+      // Se la risposta è positiva, logga il successo
       if (response.ok) {
         console.log("Profile updated successfully");
-        // Opzionalmente, aggiorna lo stato locale o esegui altre azioni al successo
       } else {
-        // Gestisci la risposta di errore (gestione personalizzata)
+        // Se la richiesta non è andata a buon fine, gestisce l'errore
         console.error("Failed to update user profile");
       }
     } catch (error) {
-      // Gestisci gli errori di rete o altri errori durante la richiesta di aggiornamento
+      // Se si verifica un errore durante la richiesta, gestisce l'errore
       console.error("Failed to update user profile", error);
     }
   };
 
-  // Se lo stato dell'utente è null, mostra un messaggio di caricamento
+  // Se è presente un errore, mostra un messaggio di errore
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  // Se user è null (ancora in caricamento), mostra "Loading..."
   if (!user) {
     return <div>Loading...</div>;
   }
 
-  // Quando i dati dell'utente sono disponibili, mostra il profilo utente e un pulsante per l'aggiornamento
+  // Una volta caricato il profilo, mostra i dettagli del profilo e un pulsante per l'aggiornamento
   return (
     <div>
       <h2>User Profile</h2>
