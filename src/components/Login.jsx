@@ -1,24 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault(); // Evita il comportamento predefinito del submit del form
-
+  const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }), // Invia le credenziali come JSON nel corpo della richiesta
-      });
+      // Effettua la chiamata al backend Laravel per il login
+      const response = await fetch("http://localhost:8000/login");
 
       if (response.ok) {
-        // Se il login è avvenuto con successo, reindirizza alla homepage di React
-        window.location.href = "/"; // Reindirizzamento alla homepage di React
+        // Se il login è avvenuto con successo, reindirizza all'endpoint del backend Laravel per l'autenticazione
+        window.location.href = "http://localhost:8000/login";
       } else {
         console.error("Login failed");
       }
@@ -34,37 +27,9 @@ const Login = () => {
           <div className="card">
             <div className="card-header">Login</div>
             <div className="card-body">
-              <form onSubmit={handleLogin}>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email:
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Password:
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
-              </form>
+              <button onClick={handleLogin} className="btn btn-primary">
+                Login with Laravel
+              </button>
             </div>
           </div>
         </div>

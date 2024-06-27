@@ -1,38 +1,187 @@
-.App {
-  text-align: center;
+/* src/styles/app.css */
+
+/* Reset dei margini e dei padding di default */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Stile per il contenitore principale */
+#root {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100vh;
+}
+
+/* Stili per l'header */
+.text-b {
+  font-size: 3rem;
+  color: #fff;
+  font-weight: bold;
+}
+/* Stili per il barbershop-info */
+.info-section {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  min-height: 50vh;
 }
 
-.App-link {
-  color: #61dafb;
+.info-section .background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.info-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Stili per la galleria */
+.gallery-section {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.gallery-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.card-c {
+  border: none;
+  background: #e9e7e7;
+  transition: transform 0.1s;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 400px;
+}
+
+.photo {
+  flex: 1 0 auto;
+  height: 350px;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border: 2px solid rgb(187, 187, 187);
+}
+
+.card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card-title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin: 0 1rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  margin: 0 1rem;
+  padding: 1rem 0;
+  font-weight: bold;
+}
+
+.box-shadow {
+  box-shadow: 5px 4px 4px rgb(115, 115, 115);
+}
+
+.box-shadow:hover {
+  transform: scale(1.4);
+  box-shadow: 4px 8px 16px rgb(255, 255, 255);
+  border: 4px solid #007bff; /* Colore del bordo illuminato */
+  border-radius: 1rem;
+}
+
+.box-shadow-button:hover {
+  transform: scale(1.2);
+  box-shadow: 4px 4px 6px rgba(255, 255, 255, 0.805);
+  border: 4px solid #ffffff; /* Colore del bordo illuminato */
+  border-radius: 2rem;
+  font-weight: bold;
+}
+
+.container-central {
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 8px 16px rgb(247, 245, 245);
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+}
+
+.container-central:hover {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+.container-central h3 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.lead-p {
+  font-size: 1.4rem;
+}
+
+.text-style {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.homepage {
+  background-color: rgb(3, 3, 3);
+}
+
+/* Stili per il footer */
+footer {
+  background-color: #333; /* Sostituisci con il colore desiderato */
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer p {
+  margin-bottom: 10px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #fff;
+}
+footer a:hover {
+  text-decoration: underline;
+  color: rgb(45, 155, 186);
 }

@@ -8,7 +8,14 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Barbershop
+          <img
+            src="/images/barbershop12.jpg"
+            alt="logo"
+            style={{
+              width: "8rem",
+              height: "2.5rem",
+            }}
+          />
         </Link>
         <button
           className="navbar-toggler"
