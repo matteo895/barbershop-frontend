@@ -15,7 +15,7 @@ const AppointmentFormModal = ({ show, handleClose, title, message }) => {
       {/* Footer del Modale */}
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Chiudi
+          CHIUDI
         </Button>
       </Modal.Footer>
     </Modal>

@@ -186,11 +186,16 @@ const AppointmentForm = () => {
   // Rendering del componente
   return (
     <div className="container">
-      <h2>Prenota un Appuntamento</h2>
+      <h2 className="text-white mt-5 text-center fs-1">
+        Prenota un Appuntamento
+      </h2>
       {selectedBarber && (
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="barberName" className="form-label">
+            <label
+              htmlFor="barberName"
+              className="form-label fs-5 text-white mb-3"
+            >
               Parrucchiere Selezionato
             </label>
             <input
@@ -202,13 +207,16 @@ const AppointmentForm = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="dateInput" className="form-label">
+            <label
+              htmlFor="dateInput"
+              className="form-label fs-5 text-white mb-3 mt-2"
+            >
               Data dell'Appuntamento
             </label>
-            <div className="d-flex">
+            <div className="d-flex ">
               <button
                 type="button"
-                className="btn btn-secondary me-2"
+                className="btn btn-secondary me-2 shadow-button "
                 onClick={() => handleMonthChange(-1)}
                 disabled={
                   currentMonth === 0 && currentYear === new Date().getFullYear()
@@ -226,7 +234,7 @@ const AppointmentForm = () => {
               />
               <button
                 type="button"
-                className="btn btn-secondary ms-2"
+                className="btn btn-secondary ms-2 shadow-button"
                 onClick={() => handleMonthChange(1)}
               >
                 Mese Successivo
@@ -237,7 +245,7 @@ const AppointmentForm = () => {
                 <button
                   type="button"
                   key={day.date}
-                  className={`btn btn-outline-primary m-1 ${
+                  className={`btn btn-outline-primary m-1 box-shadow-button ${
                     date === day.date ? "active" : ""
                   }`}
                   onClick={() => handleDayClick(day.date)}
@@ -248,7 +256,10 @@ const AppointmentForm = () => {
             </div>
           </div>
           <div className="mb-3">
-            <label htmlFor="timeInput" className="form-label">
+            <label
+              htmlFor="timeInput"
+              className="form-label fs-5 text-white mb-3"
+            >
               Ora dell'Appuntamento
             </label>
             <select
@@ -266,17 +277,19 @@ const AppointmentForm = () => {
               ))}
             </select>
           </div>
-          <button type="submit" className="btn btn-primary">
-            Prenota
+          <button
+            type="submit"
+            className="btn btn-primary shadow-button mt-3 mb-3 px-3"
+          >
+            PRENOTA ORA
           </button>
         </form>
       )}
-      <div className="mt-4">
-        <h3>Parrucchieri Disponibili</h3>
+      <div className="mt-4 ">
         <div className="row">
           {barbers.map((barber) => (
             <div className="col-md-4" key={barber.id}>
-              <div className="card mb-3">
+              <div className="card mb-3 ">
                 <img
                   src={barber.photo}
                   className="card-img-top"
@@ -286,10 +299,10 @@ const AppointmentForm = () => {
                   <h5 className="card-title">{barber.name}</h5>
                   <p className="card-text">{barber.description}</p>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary shadow-button"
                     onClick={() => setSelectedBarber(barber)}
                   >
-                    Prenota con {barber.name}
+                    SCEGLI : {barber.name}
                   </button>
                 </div>
               </div>

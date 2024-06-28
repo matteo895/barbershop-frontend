@@ -95,13 +95,6 @@ html {
   border: 2px solid rgb(187, 187, 187);
 }
 
-.card-body {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
 .card-title {
   font-size: 1.7rem;
   font-weight: bold;
@@ -126,11 +119,22 @@ html {
   border-radius: 1rem;
 }
 
+.box-shadow-button {
+  font-weight: bold;
+}
+
 .box-shadow-button:hover {
   transform: scale(1.2);
-  box-shadow: 4px 4px 6px rgba(255, 255, 255, 0.805);
-  border: 4px solid #ffffff; /* Colore del bordo illuminato */
   border-radius: 2rem;
+  font-weight: bold;
+}
+
+.shadow-button {
+  font-weight: bold;
+}
+
+.shadow-button:hover {
+  transform: scale(1.2);
   font-weight: bold;
 }
 
@@ -167,7 +171,7 @@ html {
 
 /* Stili per il footer */
 footer {
-  background-color: #333; /* Sostituisci con il colore desiderato */
+  background-color: #143342; /* Sostituisci con il colore desiderato */
   color: #fff;
   text-align: center;
   padding: 20px 0;
@@ -184,4 +188,12 @@ footer a {
 footer a:hover {
   text-decoration: underline;
   color: rgb(45, 155, 186);
+}
+
+.nav-very {
+  background-color: #143342;
+}
+.nav-b {
+  font-weight: bold;
+  font-size: 1.2rem;
 }

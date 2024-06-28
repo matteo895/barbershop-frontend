@@ -106,14 +106,16 @@ const BackOffice = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h1>Back Office</h1>
+    <div className="container mt-4 ">
+      <h1 className="text-center font-weight-bold fs-1 text-white mt-5">
+        BACK OFFICE
+      </h1>
       <BarberForm onBarberAdded={handleBarberAdded} />
-      <h2 className="mt-4">Lista Parrucchieri</h2>
+      <h2 className="mt-4 text-center text-white fs-1">Lista Parrucchieri</h2>
       <div className="row">
         {barbers.map((barber) => (
           <div key={barber.id} className="col-md-4 mb-3">
-            <div className="card">
+            <div className="card ">
               <img
                 src={barber.photo}
                 className="card-img-top"
@@ -123,16 +125,16 @@ const BackOffice = () => {
                 <h5 className="card-title">{barber.name}</h5>
                 <p className="card-text">{barber.description}</p>
                 <button
-                  className="btn btn-primary "
+                  className="btn btn-primary shadow-button mx-1 "
                   onClick={() => startEditing(barber)}
                 >
-                  Modifica
+                  MODIFICA
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger shadow-button"
                   onClick={() => handleDeleteBarber(barber.id)}
                 >
-                  Elimina
+                  ELIMINA
                 </button>
               </div>
             </div>

@@ -64,10 +64,10 @@ const BarberForm = ({ onBarberAdded }) => {
 
   return (
     <div className="container mt-4">
-      <h2>Modulo Parrucchiere (Back-office)</h2>
+      <h2 className="text-white fs-1">Modulo Aggiunta :</h2>
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="form-group">
-          <label>Nome:</label>
+          <label className="text-white mb-2 fs-5">Nome:</label>
           <input
             type="text"
             className="form-control"
@@ -77,7 +77,7 @@ const BarberForm = ({ onBarberAdded }) => {
           />
         </div>
         <div className="form-group">
-          <label>Foto URL:</label>
+          <label className="text-white mb-2 mt-3 fs-5">Foto URL:</label>
           <input
             type="text"
             className="form-control"
@@ -87,7 +87,7 @@ const BarberForm = ({ onBarberAdded }) => {
           />
         </div>
         <div className="form-group">
-          <label>Descrizione:</label>
+          <label className="text-white mb-2 mt-3 fs-5">Descrizione:</label>
           <textarea
             className="form-control"
             value={description}
@@ -95,8 +95,11 @@ const BarberForm = ({ onBarberAdded }) => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Salva
+        <button
+          type="submit"
+          className="btn btn-primary mt-4 shadow-button px-5"
+        >
+          SALVA
         </button>
       </form>
     </div>

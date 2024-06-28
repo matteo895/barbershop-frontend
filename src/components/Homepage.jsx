@@ -15,27 +15,26 @@ const Homepage = () => {
             to="/AppointmentForm"
             className="btn btn-primary btn-lg box-shadow-button"
           >
-            Prenota Ora
+            PRENOTA ORA
           </Link>
         </div>
       </div>
 
       <div className="info-section">
         <video autoPlay loop className="background-video">
-          <source
-            src="/images/Black Vintage Barber Video_20240627_190658_0001.mp4"
-            type="video/mp4"
-          />
+          <source src="/public/images/barbervideo.mp4" type="video/mp4" />
           il tuo browser non supporta questo formato video
         </video>
-        <div className="overlay"></div>
-        <div className="container-central">
-          <h3 className="display-5 mb-4 ">Il Nostro Barbershop</h3>
-          <p className="lead-p">
-            Il Barbershop offre una vasta gamma di servizi di taglio di capelli
-            e barba. Vieni a trovarci e scopri il nostro stile unico!
-          </p>
-        </div>
+        <video src="/images/barbervideo.mp4">
+          <div className="overlay"></div>
+          <div className="container-central">
+            <h3 className="display-5 mb-4 ">Il Nostro Barbershop</h3>
+            <p className="lead-p">
+              Il Barbershop offre una vasta gamma di servizi di taglio di
+              capelli e barba. Vieni a trovarci e scopri il nostro stile unico!
+            </p>
+          </div>
+        </video>
       </div>
 
       <div className="container section-2 py-5">
@@ -44,11 +43,13 @@ const Homepage = () => {
           <div className="col-md-4">
             <div className="card-c mb-4 box-shadow">
               <div className="photo">
-                <img
-                  src="/images/barbershop17.jpg"
-                  className="card-img-top"
-                  alt="Stile 1"
-                />
+                <Link to="/AppointmentForm">
+                  <img
+                    src="/images/barbershop17.jpg"
+                    className="card-img-top"
+                    alt="Stile 1"
+                  />
+                </Link>
               </div>
               <div className="card-body">
                 <h5 className="card-title text-center text-dark">
@@ -63,11 +64,13 @@ const Homepage = () => {
           <div className="col-md-4">
             <div className="card-c  mb-4 box-shadow">
               <div className="photo">
-                <img
-                  src="/images/barbershop16.jpg"
-                  className="card-img-top"
-                  alt="Stile 2"
-                />
+                <Link to="/AppointmentForm">
+                  <img
+                    src="/images/barbershop16.jpg"
+                    className="card-img-top"
+                    alt="Stile 2"
+                  />
+                </Link>
               </div>
               <div className="card-body">
                 <h5 className="card-title text-center text-dark">
@@ -82,11 +85,13 @@ const Homepage = () => {
           <div className="col-md-4">
             <div className="card-c mb-4 box-shadow">
               <div className="photo">
-                <img
-                  src="/images/barbershop18.jpg"
-                  className="card-img-top"
-                  alt="Stile 3"
-                />
+                <Link to="/AppointmentForm">
+                  <img
+                    src="/images/barbershop18.jpg"
+                    className="card-img-top"
+                    alt="Stile 3"
+                  />
+                </Link>
               </div>
               <div className="card-body">
                 <h5 className="card-title text-center text-dark">
@@ -101,7 +106,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <footer className="bg-dark text-light py-3">
+      <footer className="text-light py-3">
         <div className="container text-center">
           <p>&copy; 2024 Barbershop. All rights reserved.</p>
         </div>

@@ -200,9 +200,9 @@ const AppointmentList = () => {
 
   // Rendering del componente
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Elenco Prenotazioni</h2>
-      <div className="list-group">
+    <div className="container mt-5 mb-5">
+      <h2 className="mb-4 fs-1 text-white text-center">Elenco Prenotazioni</h2>
+      <div className=" bg-white">
         {appointments.map((appointment) => (
           <div
             key={appointment.id}
@@ -238,16 +238,16 @@ const AppointmentList = () => {
             <div>
               {/* Pulsanti per modifica ed eliminazione */}
               <button
-                className="btn btn-primary me-2"
+                className="btn btn-primary me-2 shadow-button"
                 onClick={() => handleShowEditModal(appointment)}
               >
-                Modifica
+                MODIFICA
               </button>
               <button
-                className="btn btn-danger"
+                className="btn btn-danger shadow-button"
                 onClick={() => handleShowModal(appointment)}
               >
-                Cancella
+                CANCELLA
               </button>
             </div>
           </div>

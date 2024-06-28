@@ -17,7 +17,7 @@ import Register from "./components/Register"; // Importa il componente di regist
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App bg-black">
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Homepage />} />

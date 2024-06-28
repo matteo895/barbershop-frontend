@@ -5,15 +5,15 @@ const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user")); // Controlla se l'utente è loggato
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar nav-very navbar-expand-lg navbar-dark ">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand my-1" to="/">
           <img
-            src="/images/barbershop12.jpg"
+            src="/images/barber24.jpg"
             alt="logo"
             style={{
-              width: "8rem",
-              height: "2.5rem",
+              width: "11rem",
+              height: "5rem",
             }}
           />
         </Link>
@@ -30,29 +30,29 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Home
+            <li className="nav-item nav-b">
+              <Link className="nav-link fs-4 " to="/">
+                HOME
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/AppointmentForm">
-                Prenota
+            <li className="nav-item nav-b">
+              <Link className="nav-link fs-4 " to="/AppointmentForm">
+                PRENOTA
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/AppointmentList">
-                Lista
+            <li className="nav-item nav-b">
+              <Link className="nav-link fs-4" to="/AppointmentList">
+                LISTA
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/BackOffice">
+            <li className="nav-item nav-b">
+              <Link className="nav-link fs-4" to="/BackOffice">
                 BACKOFFICE
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/UserProfile">
-                Account
+            <li className="nav-item nav-b">
+              <Link className="nav-link fs-4" to="/UserProfile">
+                ACCOUNT
               </Link>
             </li>
           </ul>
