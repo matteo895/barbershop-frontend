@@ -15,7 +15,7 @@ const BarberList = ({ barbers, onEdit, onDelete }) => {
                 className="card-img-top"
                 alt={barber.name}
               />
-              <div className="card-body">
+              <div className="card-body ">
                 <h5 className="card-title">{barber.name}</h5>
                 <p className="card-text">{barber.description}</p>
                 <button

@@ -1,41 +1,107 @@
-// App.js
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Homepage from "./components/Homepage";
-import UserProfile from "./components/UserProfile";
 import AppointmentForm from "./components/AppointmentForm";
 import BarberList from "./components/BarberList";
 import BarberForm from "./components/BarberForm";
 import AppointmentList from "./components/AppointmentList";
 import Navbar from "./components/Navbar";
 import BackOffice from "./components/BackOffice";
-import Login from "./components/Login"; // Importa il componente di login
-import Register from "./components/Register"; // Importa il componente di registrazione
+import Login from "./components/Login";
+import Register from "./components/Register";
 
-function App() {
+const App = () => {
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [logoutSuccess, setLogoutSuccess] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setLoggedInUser(user);
+    }
+    setIsLoading(false);
+  }, []);
+
+  const handleLogin = (user) => {
+    setLoggedInUser(user);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setLoggedInUser(null);
+    setLogoutSuccess(true);
+    setTimeout(() => {
+      setLogoutSuccess(false);
+    }, 3000);
+    window.location.href = "/login";
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Router>
-      <div className="App bg-black">
-        <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Homepage />} />
-          <Route path="/UserProfile" element={<UserProfile />} />
-          <Route path="/AppointmentForm" element={<AppointmentForm />} />
-          <Route path="/BarberList" element={<BarberList />} />
-          <Route path="/BarberForm" element={<BarberForm />} />
-          <Route path="/BackOffice/*" element={<BackOffice />} />
-          <Route path="/AppointmentList" element={<AppointmentList />} />
-          <Route path="/login" element={<Login />} />{" "}
-          {/* Aggiungi la rotta per il login */}
-          <Route path="/register" element={<Register />} />{" "}
-          {/* Aggiungi la rotta per la registrazione */}
-        </Routes>
-        <Footer />
+      <div
+        className="App"
+        style={{
+          backgroundImage: "url('/images/barber40.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {loggedInUser ? (
+          <>
+            <Navbar loggedInUser={loggedInUser} onLogout={handleLogout} />
+            <div className="content">
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route
+                  path="/backoffice/*"
+                  element={
+                    loggedInUser && loggedInUser.role === "admin" ? (
+                      <BackOffice />
+                    ) : (
+                      <Navigate to="/login" />
+                    )
+                  }
+                />
+                <Route path="/appointmentform" element={<AppointmentForm />} />
+                <Route path="/barberlist" element={<BarberList />} />
+                <Route path="/barberform" element={<BarberForm />} />
+                <Route path="/appointmentlist" element={<AppointmentList />} />
+              </Routes>
+            </div>
+          </>
+        ) : (
+          <div className="content" style={{ flex: "1" }}>
+            <Routes>
+              <Route
+                path="/login"
+                element={
+                  <Login onLogin={handleLogin} logoutSuccess={logoutSuccess} />
+                }
+              />
+              <Route path="/register" element={<Register />} />
+              <Route path="*" element={<Navigate to="/login" />} />
+            </Routes>
+          </div>
+        )}
+        <Footer className="footer" />
       </div>
     </Router>
   );
-}
+};
 
 export default App;

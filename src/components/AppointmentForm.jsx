@@ -185,139 +185,147 @@ const AppointmentForm = () => {
 
   // Rendering del componente
   return (
-    <div className="container">
-      <h2 className="text-white mt-5 text-center fs-1">
-        Prenota un Appuntamento
-      </h2>
-      {selectedBarber && (
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label
-              htmlFor="barberName"
-              className="form-label fs-5 text-white mb-3"
-            >
-              Parrucchiere Selezionato
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="barberName"
-              value={selectedBarber.name}
-              disabled
-            />
-          </div>
-          <div className="mb-3">
-            <label
-              htmlFor="dateInput"
-              className="form-label fs-5 text-white mb-3 mt-2"
-            >
-              Data dell'Appuntamento
-            </label>
-            <div className="d-flex ">
-              <button
-                type="button"
-                className="btn btn-secondary me-2 shadow-button "
-                onClick={() => handleMonthChange(-1)}
-                disabled={
-                  currentMonth === 0 && currentYear === new Date().getFullYear()
-                }
+    <div className="appo-form">
+      <div className="container ">
+        <h2 className="text-white mt-5 text-center fs-1">
+          Prenota un Appuntamento
+        </h2>
+        {selectedBarber && (
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label
+                htmlFor="barberName"
+                className="form-label fs-5 text-white mb-3"
               >
-                Mese Precedente
-              </button>
+                Parrucchiere Selezionato
+              </label>
               <input
                 type="text"
                 className="form-control"
-                id="dateInput"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                readOnly
+                id="barberName"
+                value={selectedBarber.name}
+                disabled
               />
-              <button
-                type="button"
-                className="btn btn-secondary ms-2 shadow-button"
-                onClick={() => handleMonthChange(1)}
-              >
-                Mese Successivo
-              </button>
             </div>
-            <div className="d-flex flex-wrap mt-2">
-              {daysOfMonth.map((day) => (
+            <div className="mb-3">
+              <label
+                htmlFor="dateInput"
+                className="form-label fs-5 text-white mb-3 mt-2"
+              >
+                Data dell'Appuntamento
+              </label>
+              <div className="d-flex ">
                 <button
                   type="button"
-                  key={day.date}
-                  className={`btn btn-outline-primary m-1 box-shadow-button ${
-                    date === day.date ? "active" : ""
-                  }`}
-                  onClick={() => handleDayClick(day.date)}
+                  className="btn btn-secondary me-2 shadow-button "
+                  onClick={() => handleMonthChange(-1)}
+                  disabled={
+                    currentMonth === 0 &&
+                    currentYear === new Date().getFullYear()
+                  }
                 >
-                  {day.display}
+                  Mese Precedente
                 </button>
-              ))}
-            </div>
-          </div>
-          <div className="mb-3">
-            <label
-              htmlFor="timeInput"
-              className="form-label fs-5 text-white mb-3"
-            >
-              Ora dell'Appuntamento
-            </label>
-            <select
-              className="form-control"
-              id="timeInput"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              required
-            >
-              <option value="">Seleziona un orario</option>
-              {times.map((timeSlot) => (
-                <option key={timeSlot} value={timeSlot}>
-                  {timeSlot}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button
-            type="submit"
-            className="btn btn-primary shadow-button mt-3 mb-3 px-3"
-          >
-            PRENOTA ORA
-          </button>
-        </form>
-      )}
-      <div className="mt-4 ">
-        <div className="row">
-          {barbers.map((barber) => (
-            <div className="col-md-4" key={barber.id}>
-              <div className="card mb-3 ">
-                <img
-                  src={barber.photo}
-                  className="card-img-top"
-                  alt={barber.name}
+                <input
+                  type="text"
+                  className="form-control"
+                  id="dateInput"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  readOnly
                 />
-                <div className="card-body">
-                  <h5 className="card-title">{barber.name}</h5>
-                  <p className="card-text">{barber.description}</p>
+                <button
+                  type="button"
+                  className="btn btn-secondary ms-2 shadow-button"
+                  onClick={() => handleMonthChange(1)}
+                >
+                  Mese Successivo
+                </button>
+              </div>
+              <div className="d-flex flex-wrap mt-2">
+                {daysOfMonth.map((day) => (
                   <button
-                    className="btn btn-primary shadow-button"
-                    onClick={() => setSelectedBarber(barber)}
+                    type="button"
+                    key={day.date}
+                    className={`btn btn-outline-primary m-1 box-shadow-button ${
+                      date === day.date ? "active" : ""
+                    }`}
+                    onClick={() => handleDayClick(day.date)}
                   >
-                    SCEGLI : {barber.name}
+                    {day.display}
                   </button>
-                </div>
+                ))}
               </div>
             </div>
-          ))}
+            <div className="mb-3">
+              <label
+                htmlFor="timeInput"
+                className="form-label fs-5 text-white mb-3"
+              >
+                Ora dell'Appuntamento
+              </label>
+              <select
+                className="form-control"
+                id="timeInput"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                required
+              >
+                <option value="">Seleziona un orario</option>
+                {times.map((timeSlot) => (
+                  <option key={timeSlot} value={timeSlot}>
+                    {timeSlot}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button
+              type="submit"
+              className="btn btn-primary shadow-button mt-3 mb-3 px-3"
+            >
+              PRENOTA ORA
+            </button>
+          </form>
+        )}
+        <div className="mt-4 ">
+          <div className="row">
+            {barbers.map((barber) => (
+              <div className="col-md-4" key={barber.id}>
+                <div className="card mb-3 box-shadow-2 ">
+                  <img
+                    src={barber.photo}
+                    className="card-img-top"
+                    alt={barber.name}
+                  />
+                  <div className="card-body bg-secondary">
+                    <h5 className="card-title text-white">{barber.name}</h5>
+                    <p className="card-text text-white">{barber.description}</p>
+                    <button
+                      className="btn btn-primary shadow-button"
+                      onClick={() => setSelectedBarber(barber)}
+                    >
+                      SCEGLI : {barber.name}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Mostra il modale di conferma */}
-      <AppointmentFormModal
-        show={modal.show}
-        handleClose={() => setModal({ ...modal, show: false })}
-        title={modal.title}
-        message={modal.message}
-      />
+        {/* Mostra il modale di conferma */}
+        <AppointmentFormModal
+          show={modal.show}
+          handleClose={() => setModal({ ...modal, show: false })}
+          title={modal.title}
+          message={modal.message}
+        />
+      </div>
+      <footer className="text-light py-3">
+        <div className="container text-center">
+          <p>&copy; 2024 Barbershop. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };

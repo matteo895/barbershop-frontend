@@ -106,118 +106,136 @@ const BackOffice = () => {
   };
 
   return (
-    <div className="container mt-4 ">
-      <h1 className="text-center font-weight-bold fs-1 text-white mt-5">
-        BACK OFFICE
-      </h1>
-      <BarberForm onBarberAdded={handleBarberAdded} />
-      <h2 className="mt-4 text-center text-white fs-1">Lista Parrucchieri</h2>
-      <div className="row">
-        {barbers.map((barber) => (
-          <div key={barber.id} className="col-md-4 mb-3">
-            <div className="card ">
-              <img
-                src={barber.photo}
-                className="card-img-top"
-                alt={barber.name}
-              />
-              <div className="card-body">
-                <h5 className="card-title">{barber.name}</h5>
-                <p className="card-text">{barber.description}</p>
-                <button
-                  className="btn btn-primary shadow-button mx-1 "
-                  onClick={() => startEditing(barber)}
-                >
-                  MODIFICA
-                </button>
-                <button
-                  className="btn btn-danger shadow-button"
-                  onClick={() => handleDeleteBarber(barber.id)}
-                >
-                  ELIMINA
-                </button>
+    <div className="back">
+      <div className="container mt-4 ">
+        <h1 className="text-center font-weight-bold fs-1 text-white mt-5">
+          BACK OFFICE
+        </h1>
+        <BarberForm onBarberAdded={handleBarberAdded} />
+        <h2 className="mt-4 text-center text-white fs-1">Lista Parrucchieri</h2>
+        <div className="row">
+          {barbers.map((barber) => (
+            <div key={barber.id} className="col-md-4 mb-3">
+              <div className="card box-shadow-2">
+                <img
+                  src={barber.photo}
+                  className="card-img-top"
+                  alt={barber.name}
+                />
+                <div className="card-body card-gray">
+                  <h5 className="card-title">{barber.name}</h5>
+                  <p className="card-text">{barber.description}</p>
+                  <div className="card-actions">
+                    <button
+                      className="btn btn-primary shadow-button mx-1 "
+                      onClick={() => startEditing(barber)}
+                    >
+                      MODIFICA
+                    </button>
+                    <button
+                      className="btn btn-danger shadow-button"
+                      onClick={() => handleDeleteBarber(barber.id)}
+                    >
+                      ELIMINA
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      {editingBarber && (
-        <div className="modal show" style={{ display: "block" }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Modifica Parrucchiere</h5>
-                <button type="button" className="close" onClick={cancelEditing}>
-                  <span>&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    handleUpdateBarber(editingBarber.id, editingBarber);
-                  }}
-                >
-                  <div className="form-group">
-                    <label>Nome:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={editingBarber.name}
-                      onChange={(e) =>
-                        setEditingBarber({
-                          ...editingBarber,
-                          name: e.target.value,
-                        })
-                      }
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Foto URL:</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value={editingBarber.photo}
-                      onChange={(e) =>
-                        setEditingBarber({
-                          ...editingBarber,
-                          photo: e.target.value,
-                        })
-                      }
-                      required
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>Descrizione:</label>
-                    <textarea
-                      className="form-control"
-                      value={editingBarber.description}
-                      onChange={(e) =>
-                        setEditingBarber({
-                          ...editingBarber,
-                          description: e.target.value,
-                        })
-                      }
-                      required
-                    />
-                  </div>
-                  <button type="submit" className="btn btn-success">
-                    Salva
-                  </button>
+          ))}
+        </div>
+        {editingBarber && (
+          <div className="modal show" style={{ display: "block" }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Modifica Parrucchiere</h5>
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="close"
                     onClick={cancelEditing}
                   >
-                    Annulla
+                    <span>&times;</span>
                   </button>
-                </form>
+                </div>
+                <div className="modal-body">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleUpdateBarber(editingBarber.id, editingBarber);
+                    }}
+                  >
+                    <div className="form-group">
+                      <label>Nome:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editingBarber.name}
+                        onChange={(e) =>
+                          setEditingBarber({
+                            ...editingBarber,
+                            name: e.target.value,
+                          })
+                        }
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Foto URL:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={editingBarber.photo}
+                        onChange={(e) =>
+                          setEditingBarber({
+                            ...editingBarber,
+                            photo: e.target.value,
+                          })
+                        }
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Descrizione:</label>
+                      <textarea
+                        className="form-control"
+                        value={editingBarber.description}
+                        onChange={(e) =>
+                          setEditingBarber({
+                            ...editingBarber,
+                            description: e.target.value,
+                          })
+                        }
+                        required
+                      />
+                    </div>
+                    <div className="card-actions">
+                      <button
+                        type="submit"
+                        className="btn btn-success shadow-button"
+                      >
+                        Salva
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary shadow-button"
+                        onClick={cancelEditing}
+                      >
+                        Annulla
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
+        )}
+      </div>
+      <footer className="text-light py-3">
+        <div className="container text-center">
+          <p>&copy; 2024 Barbershop. All rights reserved.</p>
         </div>
-      )}
+      </footer>
     </div>
   );
 };

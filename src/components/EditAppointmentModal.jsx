@@ -113,7 +113,7 @@ const EditAppointmentModal = ({
     } catch (error) {
       console.error("Errore durante l'aggiornamento:", error.message);
       setErrorMessage(
-        "A questa ora c'è già una prenotazione, prova con un'altra ora."
+        "Questa ora è già stata prenotata. Per favore, seleziona un'altra ora."
       );
     }
   };
@@ -137,11 +137,12 @@ const EditAppointmentModal = ({
         <Modal.Title>Modifica Appuntamento</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>
+        <p className="important-message">
           <strong>
             In questa sezione è possibile modificare solo l'ora della
-            prenotazione. Se desideri fare ulteriori modifiche, è consigliabile
-            cancellare la prenotazione e rifarla nella sezione Prenota.
+            prenotazione. <br />
+            Se desideri fare ulteriori modifiche, è consigliabile cancellare la
+            prenotazione esisitente per rifarla nella sezione Prenota.
           </strong>
         </p>
         <Form onSubmit={handleSubmit}>
@@ -176,7 +177,11 @@ const EditAppointmentModal = ({
               {successMessage}
             </div>
           )}
-          <Button variant="primary" type="submit" className="mt-3">
+          <Button
+            variant="primary"
+            type="submit"
+            className="mt-3 shadow-button"
+          >
             Salva Modifiche
           </Button>
         </Form>

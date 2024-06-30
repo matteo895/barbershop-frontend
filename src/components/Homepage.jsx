@@ -51,8 +51,8 @@ const Homepage = () => {
                   />
                 </Link>
               </div>
-              <div className="card-body">
-                <h5 className="card-title text-center text-dark">
+              <div className="card-body ">
+                <h5 className="card-title text-center text-dark mt-3">
                   STILE CLASSICO
                 </h5>
                 <p className="card-text text-center text-dark">
@@ -62,7 +62,7 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card-c  mb-4 box-shadow">
+            <div className="card-c   box-shadow">
               <div className="photo">
                 <Link to="/AppointmentForm">
                   <img
@@ -73,7 +73,7 @@ const Homepage = () => {
                 </Link>
               </div>
               <div className="card-body">
-                <h5 className="card-title text-center text-dark">
+                <h5 className="card-title text-center text-dark mt-3">
                   STILE MODERNO
                 </h5>
                 <p className="card-text text-center text-dark">
@@ -83,7 +83,7 @@ const Homepage = () => {
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card-c mb-4 box-shadow">
+            <div className="card-c box-shadow">
               <div className="photo">
                 <Link to="/AppointmentForm">
                   <img
@@ -94,7 +94,7 @@ const Homepage = () => {
                 </Link>
               </div>
               <div className="card-body">
-                <h5 className="card-title text-center text-dark">
+                <h5 className="card-title text-center text-dark mt-3">
                   STILE CREATIVO
                 </h5>
                 <p className="card-text text-center text-dark">
