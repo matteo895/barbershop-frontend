@@ -7,6 +7,7 @@ html {
   padding: 0;
   font-family: "Arial", sans-serif;
   width: 100%;
+  height: 100%;
 }
 /* Stile per il contenitore principale */
 #root {
@@ -81,7 +82,6 @@ html {
   background-image: url("/public/images/vintage2.jpg"); /* Sostituisci con il percorso dell'immagine desiderata */
   background-size: contain;
   background-position: center;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -344,6 +344,20 @@ html {
 /*stili per la navbar*/
 .nav-very {
   background-color: #143342;
+}
+.navbar {
+  position: sticky !important;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
 }
 .nav-b {
   font-weight: bold;

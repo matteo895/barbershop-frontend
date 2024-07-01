@@ -21,7 +21,7 @@ const Navbar = ({ loggedInUser, onLogout }) => {
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="navbarNav"
+          data-bs-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -53,6 +53,13 @@ const Navbar = ({ loggedInUser, onLogout }) => {
               <li className="nav-item nav-b">
                 <Link className="nav-link" to="/BackOffice">
                   BACKOFFICE
+                </Link>
+              </li>
+            )}
+            {loggedInUser && loggedInUser.role === "admin" && (
+              <li className="nav-item nav-b">
+                <Link className="nav-link" to="/BarberAppointment">
+                  GIORNALIERI
                 </Link>
               </li>
             )}

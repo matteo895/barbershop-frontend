@@ -3,6 +3,7 @@ import AppointmentModal from "./AppointmentModal";
 import EditAppointmentModal from "./EditAppointmentModal";
 import AppointmentFormModal from "./AppointmentFormModal";
 import { isTimeAlreadyBooked } from "./AppointmentUtils";
+import Footer from "./Footer";
 
 const AppointmentList = () => {
   const [appointments, setAppointments] = useState([]);
@@ -173,85 +174,91 @@ const AppointmentList = () => {
   };
 
   return (
-    <div className="appo-list">
-      <div className="container mt-5 mb-5">
-        <h2 className="mb-4 fs-1 text-white text-center">
-          Elenco Prenotazioni
-        </h2>
-        <div className="appointment-card-container">
-          {appointments.map((appointment) => (
-            <div key={appointment.id} className="appointment-card box-shadow-2">
-              <div className="appointment-card-body d-flex">
-                {appointment.barber?.photo && (
-                  <img
-                    src={appointment.barber.photo}
-                    alt={appointment.barber.name}
-                    className="appointment-card-img"
-                  />
-                )}
-                <div className="appointment-card-content">
-                  <h5 className="card-title text-white">
-                    {formatDate(appointment.date)}
-                  </h5>
-                  <p className="card-text fs-5">
-                    <strong>Ora:</strong> {appointment.time} <br />
-                    <strong>Parrucchiere:</strong>{" "}
-                    {appointment.barber?.name || (
-                      <em>Parrucchiere non specificato</em>
-                    )}
-                  </p>
-                </div>
-                <div className="card-actions ms-auto">
-                  <button
-                    className="btn edit-btn shadow-button edit-btn "
-                    onClick={() => handleShowEditModal(appointment)}
-                  >
-                    Modifica
-                  </button>
-                  <button
-                    className="btn delete-btn shadow-button"
-                    onClick={() => handleShowModal(appointment)}
-                  >
-                    Cancella
-                  </button>
+    <>
+      <div className="appo-list">
+        <div className="container mt-5 mb-5">
+          <h2 className="mb-4 fs-1 text-white text-center">
+            Elenco Prenotazioni
+          </h2>
+          <div className="appointment-card-container">
+            {appointments.map((appointment) => (
+              <div
+                key={appointment.id}
+                className="appointment-card box-shadow-2"
+              >
+                <div className="appointment-card-body d-flex">
+                  {appointment.barber?.photo && (
+                    <img
+                      src={appointment.barber.photo}
+                      alt={appointment.barber.name}
+                      className="appointment-card-img"
+                    />
+                  )}
+                  <div className="appointment-card-content">
+                    <h5 className="card-title text-white">
+                      {formatDate(appointment.date)}
+                    </h5>
+                    <p className="card-text fs-5">
+                      <strong>Ora:</strong> {appointment.time} <br />
+                      <strong>Parrucchiere:</strong>{" "}
+                      {appointment.barber?.name || (
+                        <em>Parrucchiere non specificato</em>
+                      )}
+                    </p>
+                  </div>
+                  <div className="card-actions ms-auto">
+                    <button
+                      className="btn edit-btn shadow-button edit-btn "
+                      onClick={() => handleShowEditModal(appointment)}
+                    >
+                      Modifica
+                    </button>
+                    <button
+                      className="btn delete-btn shadow-button"
+                      onClick={() => handleShowModal(appointment)}
+                    >
+                      Cancella
+                    </button>
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+
+          <AppointmentModal
+            show={showModal}
+            handleClose={handleCloseModal}
+            handleConfirm={() => handleDelete(selectedAppointment.id)}
+            message="Sei sicuro di voler cancellare la prenotazione?"
+          />
+          <EditAppointmentModal
+            show={showEditModal}
+            handleClose={() => setShowEditModal(false)}
+            handleUpdate={handleUpdateAppointment}
+            appointment={selectedAppointment}
+            appointments={appointments}
+            fetchAppointments={fetchAppointments}
+          />
+          <AppointmentFormModal
+            show={showFormModal}
+            handleClose={handleCloseFormModal}
+            message={errorMessage || successMessage}
+          />
+
+          {successMessage && (
+            <div className="alert alert-success mt-3" role="alert">
+              {successMessage}
             </div>
-          ))}
+          )}
+          {errorMessage && (
+            <div className="alert alert-danger mt-3" role="alert">
+              {errorMessage}
+            </div>
+          )}
         </div>
-
-        <AppointmentModal
-          show={showModal}
-          handleClose={handleCloseModal}
-          handleConfirm={() => handleDelete(selectedAppointment.id)}
-          message="Sei sicuro di voler cancellare la prenotazione?"
-        />
-        <EditAppointmentModal
-          show={showEditModal}
-          handleClose={() => setShowEditModal(false)}
-          handleUpdate={handleUpdateAppointment}
-          appointment={selectedAppointment}
-          appointments={appointments}
-          fetchAppointments={fetchAppointments}
-        />
-        <AppointmentFormModal
-          show={showFormModal}
-          handleClose={handleCloseFormModal}
-          message={errorMessage || successMessage}
-        />
-
-        {successMessage && (
-          <div className="alert alert-success mt-3" role="alert">
-            {successMessage}
-          </div>
-        )}
-        {errorMessage && (
-          <div className="alert alert-danger mt-3" role="alert">
-            {errorMessage}
-          </div>
-        )}
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

@@ -4,13 +4,16 @@ import App from "./App";
 import { AppProvider } from "./AppContext"; // Importa il provider del contesto
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AppProvider>
-      {" "}
-      {/* Avvolgi la tua App con il provider del contesto */}
-      <App />
-    </AppProvider>
+    <BrowserRouter>
+      <AppProvider>
+        {" "}
+        {/* Avvolgi la tua App con il provider del contesto */}
+        <App />
+      </AppProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

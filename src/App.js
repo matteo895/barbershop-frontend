@@ -6,7 +6,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer";
 import Homepage from "./components/Homepage";
 import AppointmentForm from "./components/AppointmentForm";
 import BarberList from "./components/BarberList";
@@ -16,6 +15,7 @@ import Navbar from "./components/Navbar";
 import BackOffice from "./components/BackOffice";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import BarberAppointment from "./components/BarberAppointment";
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -49,7 +49,7 @@ const App = () => {
   }
 
   return (
-    <Router>
+    <>
       <div
         className="App"
         style={{
@@ -59,8 +59,7 @@ const App = () => {
           backgroundRepeat: "no-repeat",
           display: "flex",
           flexDirection: "column",
-          height: "100%",
-          justifyContent: "center",
+          //height: location.pathname === "/AppointmentList" ? "100%" : "auto",
         }}
       >
         {loggedInUser ? (
@@ -78,6 +77,10 @@ const App = () => {
                       <Navigate to="/login" />
                     )
                   }
+                />
+                <Route
+                  patch="/barber-appointment/:id"
+                  element={<BarberAppointment />}
                 />
                 <Route path="/appointmentform" element={<AppointmentForm />} />
                 <Route path="/barberlist" element={<BarberList />} />
@@ -101,8 +104,7 @@ const App = () => {
           </div>
         )}
       </div>
-      <Footer className="footer" />
-    </Router>
+    </>
   );
 };
 
