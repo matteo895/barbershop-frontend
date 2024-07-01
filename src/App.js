@@ -15,7 +15,7 @@ import Navbar from "./components/Navbar";
 import BackOffice from "./components/BackOffice";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import BarberAppointment from "./components/BarberAppointment";
+import BarberAppointment from "./components/BarberAppointment"; // Importato il componente BarberAppointment
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -59,7 +59,6 @@ const App = () => {
           backgroundRepeat: "no-repeat",
           display: "flex",
           flexDirection: "column",
-          //height: location.pathname === "/AppointmentList" ? "100%" : "auto",
         }}
       >
         {loggedInUser ? (
@@ -78,14 +77,26 @@ const App = () => {
                     )
                   }
                 />
-                <Route
-                  patch="/barber-appointment/:id"
-                  element={<BarberAppointment />}
-                />
                 <Route path="/appointmentform" element={<AppointmentForm />} />
                 <Route path="/barberlist" element={<BarberList />} />
                 <Route path="/barberform" element={<BarberForm />} />
                 <Route path="/appointmentlist" element={<AppointmentList />} />
+
+                {/* Rotta dinamica per le prenotazioni di un barbiere */}
+                <Route
+                  path="/barbers/:barberId/appointments"
+                  element={<BarberAppointment />}
+                />
+
+                {/* Reindirizzamento dinamico per il barbiere attualmente loggato */}
+                <Route
+                  path="/barberappointment"
+                  element={
+                    <Navigate
+                      to={`/barbers/${loggedInUser?.barberId}/appointments`}
+                    />
+                  }
+                />
               </Routes>
             </div>
           </>

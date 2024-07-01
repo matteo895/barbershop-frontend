@@ -111,11 +111,17 @@ const BackOffice = () => {
     <>
       <div className="back">
         <div className="container mt-4 ">
-          <h1 className="text-center font-weight-bold fs-1 text-white mt-5">
+          <h1
+            className="text-center font-weight-bold fs-1 text-white mt-5"
+            style={{ fontWeight: "bold" }}
+          >
             BACK OFFICE
           </h1>
           <BarberForm onBarberAdded={handleBarberAdded} />
-          <h2 className="mt-4 text-center text-white fs-1">
+          <h2
+            className="mt-4 text-center text-white fs-1 mb-5"
+            style={{ fontWeight: "bold" }}
+          >
             Lista Parrucchieri
           </h2>
           <div className="row ">

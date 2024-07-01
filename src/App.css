@@ -467,3 +467,10 @@ footer a:hover {
   background-color: #007bff;
   color: #fff;
 }
+
+@media (max-width: 768px) {
+  .hair-list {
+    display: flex;
+    justify-content: center;
+  }
+}

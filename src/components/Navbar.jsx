@@ -8,7 +8,7 @@ const Navbar = ({ loggedInUser, onLogout }) => {
   };
 
   return (
-    <nav className="navbar nav-very navbar-expand-lg navbar-dark ">
+    <nav className="navbar navbar-expand-lg nav-very navbar-dark ">
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img
@@ -33,7 +33,7 @@ const Navbar = ({ loggedInUser, onLogout }) => {
             {loggedInUser && loggedInUser.role === "user" && (
               <>
                 <li className="nav-item nav-b">
-                  <Link className="nav-link " to="/">
+                  <Link className="nav-link nav-b" to="/">
                     HOME
                   </Link>
                 </li>
@@ -50,18 +50,19 @@ const Navbar = ({ loggedInUser, onLogout }) => {
               </>
             )}
             {loggedInUser && loggedInUser.role === "admin" && (
-              <li className="nav-item nav-b">
-                <Link className="nav-link" to="/BackOffice">
-                  BACKOFFICE
-                </Link>
-              </li>
-            )}
-            {loggedInUser && loggedInUser.role === "admin" && (
-              <li className="nav-item nav-b">
-                <Link className="nav-link" to="/BarberAppointment">
-                  GIORNALIERI
-                </Link>
-              </li>
+              <>
+                <li className="nav-item nav-b">
+                  <Link className="nav-link " to="/BackOffice">
+                    BACKOFFICE
+                  </Link>
+                </li>
+                {/* Link dinamico per i giornalieri dei barbieri */}
+                <li className="nav-item nav-b">
+                  <Link className="nav-link" to="/BarberList">
+                    GIORNALIERI
+                  </Link>
+                </li>
+              </>
             )}
             {loggedInUser && (
               <li className="nav-item nav-b">

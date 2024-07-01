@@ -176,7 +176,10 @@ const AppointmentForm = () => {
     <>
       <div className="appo-form">
         <div className="container">
-          <h2 className="text-white mt-5 text-center fs-1">
+          <h2
+            className="text-white mt-5 text-center fs-1"
+            style={{ fontWeight: "bold" }}
+          >
             Prenota un Appuntamento
           </h2>
 
@@ -185,7 +188,7 @@ const AppointmentForm = () => {
               <div className="mb-3">
                 <label
                   htmlFor="barberName"
-                  className="form-label fs-5 text-white mb-3"
+                  className="form-label fs-4 text-white mb-3"
                 >
                   Parrucchiere Selezionato
                 </label>
@@ -201,7 +204,7 @@ const AppointmentForm = () => {
               <div className="mb-3">
                 <label
                   htmlFor="dateInput"
-                  className="form-label fs-5 text-white mb-3 mt-2"
+                  className="form-label fs-4 text-white mb-3 mt-2"
                 >
                   Data Dell'Appuntamento
                 </label>
@@ -252,7 +255,7 @@ const AppointmentForm = () => {
               <div className="mb-3">
                 <label
                   htmlFor="timeInput"
-                  className="form-label fs-5 text-white mb-3"
+                  className="form-label fs-4 text-white mb-3"
                 >
                   Ora Dell'Appuntamento
                 </label>

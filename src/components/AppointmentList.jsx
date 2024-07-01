@@ -177,7 +177,10 @@ const AppointmentList = () => {
     <>
       <div className="appo-list">
         <div className="container mt-5 mb-5">
-          <h2 className="mb-4 fs-1 text-white text-center">
+          <h2
+            className="mb-4 fs-1 text-white text-center mb-5"
+            style={{ fontWeight: "bold" }}
+          >
             Elenco Prenotazioni
           </h2>
           <div className="appointment-card-container">
