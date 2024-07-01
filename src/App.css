@@ -6,13 +6,13 @@ html {
   margin: 0;
   padding: 0;
   font-family: "Arial", sans-serif;
+  width: 100%;
 }
-
 /* Stile per il contenitore principale */
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100%;
 }
 
 /* Stili per l'header */
@@ -20,36 +20,6 @@ html {
   font-size: 3rem;
   color: #fff;
   font-weight: bold;
-}
-/* Stili per il barbershop-info */
-.info-section {
-  position: relative;
-  overflow: hidden;
-  color: #fff;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50vh;
-}
-
-.info-section .background-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-.info-section .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.1);
 }
 
 /* Stili per la galleria */
@@ -72,193 +42,7 @@ html {
 
 /* Aggiungi il seguente codice per lo stile del login */
 
-.login-container {
-  background-image: url("/public/images/vintage2.jpg"); /* Sostituisci con il percorso dell'immagine desiderata */
-  background-size: contain;
-  background-position: center;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.important-message {
-  font-size: 1.1em;
-  color: red;
-  background-color: #fff3cd;
-  border: 1px solid #ff9100;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.card-body {
-  padding: 2rem;
-}
-
-.card-gray {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.card-title {
-  font-size: 1.7rem;
-  font-weight: bold;
-  margin: 0 1rem;
-  color: #ffffff;
-}
-
-.card-text {
-  font-size: 1rem;
-  margin: 0 1rem;
-  padding: 1rem 0;
-  font-weight: bold;
-  color: #ffffff;
-}
-
-.card-c {
-  border: none;
-  background: #e9e7e7;
-  transition: transform 0.1s;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 400px;
-}
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.card-login {
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 4rem;
-  box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.6);
-}
-.card {
-  width: 300px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-}
-
-@media (max-width: 768px) {
-  .card {
-    width: 100%;
-  }
-}
-
-.btn-primary {
-  background-color: #007bff; /* Colore del bottone di login */
-  border-color: #007bff;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3; /* Colore del bottone al passaggio del mouse */
-  border-color: #0056b3;
-}
-
-.form-control {
-  border-color: #ced4da; /* Colore del bordo dell'input */
-}
-
-.form-control:focus {
-  border-color: #007bff; /* Colore del bordo dell'input in stato di focus */
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.photo {
-  flex: 1 0 auto;
-  height: 350px;
-}
-
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  border: 2px solid rgb(187, 187, 187);
-}
-
-.box-shadow {
-  box-shadow: 5px 4px 4px rgb(115, 115, 115);
-}
-
-.box-shadow:hover {
-  transform: scale(1.2);
-  box-shadow: 4px 8px 16px rgb(255, 255, 255);
-  border: 4px solid #007bff; /* Colore del bordo illuminato */
-  border-radius: 1rem;
-}
-
-.box-shadow-2:hover {
-  transform: scale(1.1);
-  box-shadow: 4px 8px 16px rgb(255, 255, 255);
-  border: 4px solid #007bff; /* Colore del bordo illuminato */
-  border-radius: 1rem;
-}
-
-.box-shadow-button {
-  font-weight: bold;
-}
-
-.box-shadow-button:hover {
-  transform: scale(1.2);
-  border-radius: 2rem;
-  font-weight: bold;
-}
-
-.shadow-button {
-  font-weight: bold;
-}
-
-.shadow-button:hover {
-  transform: scale(1.1);
-  font-weight: bold;
-}
-
-.container-central {
-  background: rgba(0, 0, 0, 0.7);
-  box-shadow: 4px 8px 16px rgb(247, 245, 245);
-  padding: 1rem 2rem;
-  border-radius: 2rem;
-}
-
-.container-central:hover {
-  transform: scale(1.05);
-  background: rgba(0, 0, 0, 0.9);
-  cursor: pointer;
-}
-
-.container-central h3 {
-  font-size: 3rem;
-  font-weight: bold;
-}
-
-.lead-p {
-  font-size: 1.4rem;
-}
-
-.text-style {
-  font-weight: bold;
-  font-size: 3rem;
-}
-
-.homepage {
-  background-color: rgb(3, 3, 3);
-}
-
-/* Styles for the login form */
+/* Stile per il login */
 .login-container {
   display: flex;
   justify-content: center;
@@ -293,6 +77,279 @@ html {
   margin-top: 1rem;
 }
 
+.login-container {
+  background-image: url("/public/images/vintage2.jpg"); /* Sostituisci con il percorso dell'immagine desiderata */
+  background-size: contain;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.important-message {
+  font-size: 1.1em;
+  color: red;
+  background-color: #fff3cd;
+  border: 1px solid #ff9100;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.card-gray {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card-login {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 4rem;
+  box-shadow: 6px 6px 8px rgba(0, 0, 0, 0.6);
+}
+.card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+}
+
+.btn-primary {
+  background-color: #007bff; /* Colore del bottone di login */
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Colore del bottone al passaggio del mouse */
+  border-color: #0056b3;
+}
+
+/*stile per la homepage*/
+.homepage {
+  background-color: rgb(3, 3, 3);
+}
+
+.lead-p {
+  font-size: 1.4rem;
+}
+
+.info-section {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.info-section .background-video {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.container-central {
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 4px 8px 16px rgb(247, 245, 245);
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+}
+
+.container-central:hover {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+.container-central h3 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.text-style {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.photo {
+  flex: 1 0 auto;
+  height: 350px;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  border: 2px solid rgb(187, 187, 187);
+}
+
+.card-c {
+  border: none;
+  background: #e9e7e7;
+  transition: transform 0.1s;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 400px;
+}
+
+.box-shadow {
+  box-shadow: 5px 4px 4px rgb(115, 115, 115);
+}
+
+.box-shadow:hover {
+  transform: scale(1.2);
+  box-shadow: 4px 8px 16px rgb(255, 255, 255);
+  border: 4px solid #007bff; /* Colore del bordo illuminato */
+  border-radius: 1rem;
+}
+
+@media (max-width: 769px) {
+  .home-cent {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+  }
+
+  .card-c {
+    width: 20rem;
+  }
+}
+
+/*Stili per AppointmentForm*/
+
+.form-control {
+  border-color: #ced4da; /* Colore del bordo dell'input */
+}
+
+.form-control:focus {
+  border-color: #007bff; /* Colore del bordo dell'input in stato di focus */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.bg-color {
+  background-color: rgba(16, 15, 15, 0.395);
+}
+
+@media (max-width: 769px) {
+  .g-form {
+    width: 20rem;
+    margin: 1rem;
+  }
+
+  .g-appo-form {
+    display: flex;
+    justify-content: center;
+  }
+  .appo-form-date {
+    justify-content: center;
+  }
+
+  .button-form {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.appo-form-date {
+  background-color: rgba(0, 0, 0, 0.907);
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+  border-radius: 3rem;
+  margin-top: 2rem;
+}
+
+/*stili per AppointmentList*/
+
+.appointment-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.appointment-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.8); /* Colore di sfondo delle card */
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.appointment-card-body {
+  display: flex;
+  align-items: center;
+}
+
+.appointment-card-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.appointment-card-content {
+  flex: 1;
+}
+
+.card-actions button.delete-btn {
+  background-color: #dc3545;
+}
+
+.card-actions button.edit-btn {
+  background-color: #ffc107;
+}
+
+@media (max-width: 768px) {
+  .card-actions {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+  }
+}
+
+/*stili per la navbar*/
+.nav-very {
+  background-color: #143342;
+}
+.nav-b {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
 /* Stili per il footer */
 footer {
   background-color: #143342; /* Sostituisci con il colore desiderato */
@@ -314,93 +371,6 @@ footer a:hover {
   color: rgb(45, 155, 186);
 }
 
-.nav-very {
-  background-color: #143342;
-}
-.nav-b {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-/* App.css */
-.appointment-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.appointment-card {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.8); /* Colore di sfondo delle card */
-  padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.appointment-card-body {
-  display: flex;
-  align-items: center;
-}
-
-.appointment-card-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
-}
-
-.appointment-card-content {
-  flex: 1;
-}
-
-.appointment-card-title {
-  color: #343a40; /* Colore del testo del titolo */
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-.appointment-card-text {
-  color: #6c757d; /* Colore del testo */
-}
-
-.card-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-left: auto;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.card-actions button {
-  padding: 8px 16px;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
-.card-actions button:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.card-actions button.delete-btn {
-  background-color: #dc3545;
-}
-
-.card-actions button.edit-btn {
-  background-color: #ffc107;
-}
-
-.btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 @media (max-width: 768px) {
   .appointment-card {
     width: 100%; /* Una card per riga su schermi più piccoli */
@@ -420,12 +390,66 @@ footer a:hover {
     margin-right: 0; /* Rimuovi il margine destro sull'immagine su schermi piccoli */
     margin-bottom: 10px; /* Spazio tra l'immagine e il contenuto su schermi piccoli */
   }
+}
 
-  .card-actions {
-    display: inline-block;
-  }
+/*stili universali per le diverse pagine (homepage/AppointmentForm/AppointmentList/login/)*/
+.box-shadow-button {
+  font-weight: bold;
+}
 
-  .card-actions button {
-    margin: 0 5px; /* Aggiungi margine tra i bottoni per separarli */
-  }
+.box-shadow-button:hover {
+  transform: scale(1.2);
+  border-radius: 2rem;
+  font-weight: bold;
+}
+
+.shadow-button {
+  font-weight: bold;
+}
+
+.shadow-button:hover {
+  transform: scale(1.1);
+  font-weight: bold;
+}
+
+.box-shadow-2:hover {
+  transform: scale(1.1);
+  box-shadow: 4px 8px 16px rgb(255, 255, 255);
+  border: 4px solid #007bff; /* Colore del bordo illuminato */
+  border-radius: 1rem;
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.card-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card-actions button {
+  padding: 8px 16px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.card-actions button:hover {
+  background-color: #007bff;
+  color: #fff;
 }

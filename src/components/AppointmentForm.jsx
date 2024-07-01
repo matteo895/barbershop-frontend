@@ -212,7 +212,7 @@ const AppointmentForm = () => {
                 htmlFor="dateInput"
                 className="form-label fs-5 text-white mb-3 mt-2"
               >
-                Data dell'Appuntamento
+                Data Dell'Appuntamento
               </label>
               <div className="d-flex ">
                 <button
@@ -242,7 +242,7 @@ const AppointmentForm = () => {
                   Mese Successivo
                 </button>
               </div>
-              <div className="d-flex flex-wrap mt-2">
+              <div className="d-flex flex-wrap  appo-form-date">
                 {daysOfMonth.map((day) => (
                   <button
                     type="button"
@@ -262,7 +262,7 @@ const AppointmentForm = () => {
                 htmlFor="timeInput"
                 className="form-label fs-5 text-white mb-3"
               >
-                Ora dell'Appuntamento
+                Ora Dell'Appuntamento
               </label>
               <select
                 className="form-control"
@@ -279,33 +279,41 @@ const AppointmentForm = () => {
                 ))}
               </select>
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary shadow-button mt-3 mb-3 px-3"
-            >
-              PRENOTA ORA
-            </button>
+            <div className="button-form">
+              <button
+                type="submit"
+                className="btn btn-primary shadow-button mt-3 mb-3 px-3"
+              >
+                PRENOTA ORA
+              </button>
+            </div>
           </form>
         )}
         <div className="mt-4 ">
           <div className="row">
             {barbers.map((barber) => (
-              <div className="col-md-4" key={barber.id}>
-                <div className="card mb-3 box-shadow-2 ">
+              <div className="col-md-4 g-appo-form" key={barber.id}>
+                <div className="card mb-5 mt-2 g-form box-shadow-2 mx-1 ">
                   <img
                     src={barber.photo}
                     className="card-img-top"
                     alt={barber.name}
                   />
-                  <div className="card-body bg-secondary">
-                    <h5 className="card-title text-white">{barber.name}</h5>
-                    <p className="card-text text-white">{barber.description}</p>
-                    <button
-                      className="btn btn-primary shadow-button"
-                      onClick={() => setSelectedBarber(barber)}
-                    >
-                      SCEGLI : {barber.name}
-                    </button>
+                  <div className="card-body bg-color">
+                    <h5 className="card-title text-black text-center">
+                      {barber.name}
+                    </h5>
+                    <p className="card-text text-dark text-center">
+                      {barber.description}
+                    </p>
+                    <div className="d-flex justify-content-center">
+                      <button
+                        className="btn btn-primary shadow-button"
+                        onClick={() => setSelectedBarber(barber)}
+                      >
+                        SCEGLI : {barber.name}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -321,11 +329,6 @@ const AppointmentForm = () => {
           message={modal.message}
         />
       </div>
-      <footer className="text-light py-3">
-        <div className="container text-center">
-          <p>&copy; 2024 Barbershop. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };

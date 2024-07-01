@@ -95,12 +95,14 @@ const BarberForm = ({ onBarberAdded }) => {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary mt-4 shadow-button px-5"
-        >
-          SALVA
-        </button>
+        <div className="button-form">
+          <button
+            type="submit"
+            className="btn btn-primary mt-4 shadow-button px-5"
+          >
+            SALVA
+          </button>
+        </div>
       </form>
     </div>
   );

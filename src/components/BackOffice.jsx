@@ -113,18 +113,20 @@ const BackOffice = () => {
         </h1>
         <BarberForm onBarberAdded={handleBarberAdded} />
         <h2 className="mt-4 text-center text-white fs-1">Lista Parrucchieri</h2>
-        <div className="row">
+        <div className="row ">
           {barbers.map((barber) => (
-            <div key={barber.id} className="col-md-4 mb-3">
-              <div className="card box-shadow-2">
+            <div key={barber.id} className="col-md-4 mb-3 g-appo-form">
+              <div className="card box-shadow-2 g-form">
                 <img
                   src={barber.photo}
                   className="card-img-top"
                   alt={barber.name}
                 />
-                <div className="card-body card-gray">
-                  <h5 className="card-title">{barber.name}</h5>
-                  <p className="card-text">{barber.description}</p>
+                <div className="card-body bg-color">
+                  <h5 className="card-title text-center">{barber.name}</h5>
+                  <p className="card-text text-dark text-center">
+                    {barber.description}
+                  </p>
                   <div className="card-actions">
                     <button
                       className="btn btn-primary shadow-button mx-1 "
@@ -231,11 +233,6 @@ const BackOffice = () => {
           </div>
         )}
       </div>
-      <footer className="text-light py-3">
-        <div className="container text-center">
-          <p>&copy; 2024 Barbershop. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };

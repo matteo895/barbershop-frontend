@@ -59,6 +59,8 @@ const App = () => {
           backgroundRepeat: "no-repeat",
           display: "flex",
           flexDirection: "column",
+          height: "100%",
+          justifyContent: "center",
         }}
       >
         {loggedInUser ? (
@@ -98,8 +100,8 @@ const App = () => {
             </Routes>
           </div>
         )}
-        <Footer className="footer" />
       </div>
+      <Footer className="footer" />
     </Router>
   );
 };

@@ -21,26 +21,29 @@ const Homepage = () => {
       </div>
 
       <div className="info-section">
-        <video autoPlay loop className="background-video">
-          <source src="/public/images/barbervideo.mp4" type="video/mp4" />
+        <video
+          autoPlay
+          controls
+          muted
+          loop
+          className="background-video"
+          src="images/barbervideo.mp4"
+        >
           il tuo browser non supporta questo formato video
         </video>
-        <video src="/images/barbervideo.mp4">
-          <div className="overlay"></div>
-          <div className="container-central">
-            <h3 className="display-5 mb-4 ">Il Nostro Barbershop</h3>
-            <p className="lead-p">
-              Il Barbershop offre una vasta gamma di servizi di taglio di
-              capelli e barba. Vieni a trovarci e scopri il nostro stile unico!
-            </p>
-          </div>
-        </video>
+        <div className="container-central mt-5 mb-3 mx-3">
+          <h3 className="display-5 mb-4 text-center">Il Nostro Barbershop</h3>
+          <p className="lead-p text-center">
+            Il Barbershop offre una vasta gamma di servizi di taglio di capelli
+            e barba. Vieni a trovarci e scopri il nostro stile unico!
+          </p>
+        </div>
       </div>
 
       <div className="container section-2 py-5">
         <h3 className="text-style  mb-4 text-center text-white">Hair Style</h3>
         <div className="row justify-content-center">
-          <div className="col-md-4">
+          <div className="col-md-4 home-cent">
             <div className="card-c mb-4 box-shadow">
               <div className="photo">
                 <Link to="/AppointmentForm">
@@ -61,7 +64,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 home-cent">
             <div className="card-c   box-shadow">
               <div className="photo">
                 <Link to="/AppointmentForm">
@@ -82,7 +85,7 @@ const Homepage = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 home-cent">
             <div className="card-c box-shadow">
               <div className="photo">
                 <Link to="/AppointmentForm">
@@ -105,12 +108,6 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-
-      <footer className="text-light py-3">
-        <div className="container text-center">
-          <p>&copy; 2024 Barbershop. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };

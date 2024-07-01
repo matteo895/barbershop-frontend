@@ -181,7 +181,7 @@ const AppointmentList = () => {
         <div className="appointment-card-container">
           {appointments.map((appointment) => (
             <div key={appointment.id} className="appointment-card box-shadow-2">
-              <div className="appointment-card-body appointment-card-gray d-flex">
+              <div className="appointment-card-body d-flex">
                 {appointment.barber?.photo && (
                   <img
                     src={appointment.barber.photo}
@@ -201,9 +201,9 @@ const AppointmentList = () => {
                     )}
                   </p>
                 </div>
-                <div className="card-actions ms-auto d-flex flex-column">
+                <div className="card-actions ms-auto">
                   <button
-                    className="btn edit-btn shadow-button edit-btn mb-2"
+                    className="btn edit-btn shadow-button edit-btn "
                     onClick={() => handleShowEditModal(appointment)}
                   >
                     Modifica
@@ -251,11 +251,6 @@ const AppointmentList = () => {
           </div>
         )}
       </div>
-      <footer className="text-light py-3">
-        <div className="container text-center">
-          <p>&copy; 2024 Barbershop. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };

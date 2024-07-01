@@ -3,6 +3,11 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="footer  text-light">
+      <div className="text-light py-3">
+        <div className="container text-center">
+          <p>&copy; 2024 Barbershop. All rights reserved.</p>
+        </div>
+      </div>
       <div className="container">
         <div className="row">
           <div className="col-md-6">
