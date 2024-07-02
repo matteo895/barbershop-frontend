@@ -64,7 +64,7 @@ const BarberAppointment = () => {
           {appointments.map((appointment) => (
             <div
               key={appointment.id}
-              className="appointment-card col-md-4 mb-5 mt-5 box-shadow-2"
+              className="appointment-card col-md-4 mb-5 mt-5 "
             >
               <h2 className="text-center mb-5" style={{ fontWeight: "bold" }}>
                 APPUNTAMENTI DI : {appointment.name}

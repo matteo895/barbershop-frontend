@@ -339,6 +339,10 @@ html {
     width: 100%;
     flex-direction: row;
   }
+  .card-actions-b {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 /*stili per la navbar*/
@@ -362,6 +366,8 @@ html {
 .nav-b {
   font-weight: bold;
   font-size: 1.2rem;
+  display: flex;
+  justify-content: end;
 }
 
 /* Stili per il footer */
@@ -450,6 +456,14 @@ footer a:hover {
 }
 
 .card-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.card-actions-b {
   width: 100%;
   display: flex;
   gap: 10px;

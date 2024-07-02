@@ -98,7 +98,7 @@ const BackOffice = () => {
   return (
     <>
       <div className="back">
-        <div className="container mt-4">
+        <div className="container mt-4 ">
           <h1 className="text-center font-weight-bold fs-1 text-white mt-5">
             BACK OFFICE
           </h1>
@@ -106,10 +106,14 @@ const BackOffice = () => {
           <h2 className="mt-4 text-center text-white fs-1 mb-5">
             Lista Parrucchieri
           </h2>
-          <div className="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4 mb-5">
+          <div className="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4 mb-5 ">
             {barbers.map((barber) => (
-              <div key={barber.id} className="col mb-5">
-                <div className="card h-100 g-card-a box-shadow-2 mx-2">
+              <div
+                key={barber.id}
+                className="col mb-5 "
+                style={{ display: "flex" }}
+              >
+                <div className="card h-100 g-card-a  mx-2">
                   <img
                     src={`http://localhost:8000${barber.photo}`}
                     className="card-img-top-a"
@@ -122,7 +126,7 @@ const BackOffice = () => {
                     </p>
                   </div>
 
-                  <div className="card-actions bg-secondary">
+                  <div className="card-actions-b bg-secondary">
                     <button
                       className="btn btn-primary shadow-button mx-1"
                       onClick={() => startEditing(barber)}

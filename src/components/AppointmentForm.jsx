@@ -177,7 +177,7 @@ const AppointmentForm = () => {
       <div className="appo-form">
         <div className="container">
           <h2
-            className="text-white mt-5 text-center fs-1"
+            className="text-white mt-5 mb-5 text-center fs-1"
             style={{ fontWeight: "bold" }}
           >
             Prenota un Appuntamento
@@ -289,7 +289,11 @@ const AppointmentForm = () => {
           <div className="mt-4">
             <div className="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4 mb-5  ">
               {barbers.map((barber) => (
-                <div key={barber.id} className="col mb-5">
+                <div
+                  key={barber.id}
+                  className="col mb-5"
+                  style={{ display: "flex" }}
+                >
                   <div className="card h-100 g-card-a box-shadow-2 mx-2 ">
                     <img
                       src={`http://localhost:8000${barber.photo}`}

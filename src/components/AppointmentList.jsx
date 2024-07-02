@@ -192,7 +192,7 @@ const AppointmentList = () => {
                 <div className="appointment-card-body d-flex">
                   {appointment.barber?.photo && (
                     <img
-                      src={appointment.barber.photo}
+                      src={`http://localhost:8000${appointment.barber.photo}`}
                       alt={appointment.barber.name}
                       className="appointment-card-img"
                     />
@@ -209,6 +209,7 @@ const AppointmentList = () => {
                       )}
                     </p>
                   </div>
+
                   <div className="card-actions ms-auto">
                     <button
                       className="btn edit-btn shadow-button edit-btn "

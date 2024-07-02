@@ -32,7 +32,7 @@ const BarberList = () => {
           <div className="row">
             {barbers.map((barber) => (
               <div key={barber.id} className="col-md-4 mb-5 hair-list">
-                <div className="card bg-secondary text-white box-shadow-2 mx-2 g-card-a">
+                <div className="card bg-secondary text-white mx-2 g-card-a">
                   <div className="card-body ">
                     <h5 className="card-title mb-4">{barber.name}</h5>
                     <Link

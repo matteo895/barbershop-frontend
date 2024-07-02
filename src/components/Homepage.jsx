@@ -48,7 +48,7 @@ const Homepage = () => {
           </h3>
           <div className="row justify-content-center mb-3">
             <div className="col-md-4 home-cent">
-              <div className="card-c mb-4 box-shadow mx-3">
+              <div className="card-c mb-4 box-shadow mx-3 ">
                 <div className="photo">
                   <Link to="/AppointmentForm">
                     <img
@@ -58,7 +58,7 @@ const Homepage = () => {
                     />
                   </Link>
                 </div>
-                <div className="card-body my-2 mx-2 ">
+                <div className="card-body my-4 mx-2 ">
                   <h5 className="card-title text-center text-dark mt-3">
                     STILE CLASSICO
                   </h5>
@@ -79,7 +79,7 @@ const Homepage = () => {
                     />
                   </Link>
                 </div>
-                <div className="card-body my-2 mx-2">
+                <div className="card-body my-4 mx-2">
                   <h5 className="card-title text-center text-dark mt-3">
                     STILE MODERNO
                   </h5>
