@@ -142,7 +142,7 @@ const EditAppointmentModal = ({
             In questa sezione è possibile modificare solo l'ora della
             prenotazione. <br />
             Se desideri fare ulteriori modifiche, è consigliabile cancellare la
-            prenotazione esisitente per rifarla nella sezione Prenota.
+            prenotazione esisitente per ricrearla nella sezione Prenota.
           </strong>
         </p>
         <Form onSubmit={handleSubmit}>
