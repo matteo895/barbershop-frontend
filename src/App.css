@@ -450,11 +450,21 @@ footer a:hover {
 }
 
 .card-actions {
+  width: 100%;
   display: flex;
   gap: 10px;
   margin-left: auto;
   justify-content: space-between;
-  margin-top: 20px;
+  padding: 10px;
+}
+
+.card-actions-c {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  justify-content: center;
+  padding: 10px;
 }
 
 .card-actions button {
@@ -473,4 +483,22 @@ footer a:hover {
     display: flex;
     justify-content: center;
   }
+}
+
+.card-img-top-a {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-body-a {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.g-card-a {
+  box-shadow: 6px 10px 10px rgba(103, 103, 103, 0.411);
 }

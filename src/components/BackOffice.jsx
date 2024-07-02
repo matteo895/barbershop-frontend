@@ -1,65 +1,57 @@
 import React, { useState, useEffect } from "react";
-import BarberForm from "./BarberForm"; // Importa il componente BarberForm
-import Footer from "./Footer"; // Importa il componente Footer
+import BarberForm from "./BarberForm";
+import Footer from "./Footer";
 
 const BackOffice = () => {
-  // Definisce gli stati del componente
-  const [barbers, setBarbers] = useState([]); // Stato per memorizzare la lista dei parrucchieri
-  const [csrfToken, setCSRFToken] = useState(""); // Stato per memorizzare il token CSRF
-  const [editingBarber, setEditingBarber] = useState(null); // Stato per memorizzare il parrucchiere in fase di modifica
+  const [barbers, setBarbers] = useState([]);
+  const [csrfToken, setCSRFToken] = useState("");
+  const [editingBarber, setEditingBarber] = useState(null);
 
-  // Effetto per ottenere il token CSRF e la lista dei parrucchieri quando il componente viene montato
   useEffect(() => {
-    fetchCSRFToken(); // Chiama la funzione per ottenere il token CSRF
-    fetchBarbers(); // Chiama la funzione per ottenere la lista dei parrucchieri
+    fetchCSRFToken();
+    fetchBarbers();
   }, []);
 
-  // Funzione per ottenere il token CSRF dal server
   const fetchCSRFToken = async () => {
     try {
       const response = await fetch("http://localhost:8000/csrf-token", {
-        credentials: "include", // Includi le credenziali per la richiesta
+        credentials: "include",
       });
-      const data = await response.json(); // Estrai il token CSRF dalla risposta
-      setCSRFToken(data.csrfToken); // Imposta il token CSRF nello stato
+      const data = await response.json();
+      setCSRFToken(data.csrfToken);
     } catch (error) {
       console.error("Errore nel recupero del token CSRF:", error.message);
     }
   };
 
-  // Funzione per ottenere la lista dei parrucchieri dal server
   const fetchBarbers = async () => {
     try {
       const response = await fetch("http://localhost:8000/barbers");
-      const data = await response.json(); // Estrai la lista dei parrucchieri dalla risposta
-      setBarbers(data); // Imposta la lista dei parrucchieri nello stato
+      const data = await response.json();
+      setBarbers(data);
     } catch (error) {
       console.error("Errore nel recupero dei parrucchieri:", error.message);
     }
   };
 
-  // Funzione chiamata quando un parrucchiere viene aggiunto
   const handleBarberAdded = () => {
-    fetchBarbers(); // Aggiorna la lista dei parrucchieri
+    fetchBarbers();
   };
 
-  // Funzione per cancellare un parrucchiere
   const handleDeleteBarber = async (id) => {
     try {
       const response = await fetch(`http://localhost:8000/barbers/${id}`, {
-        method: "DELETE", // Metodo della richiesta DELETE
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRF-TOKEN": csrfToken, // Imposta il token CSRF nell'header della richiesta
+          "X-CSRF-TOKEN": csrfToken,
         },
-        credentials: "include", // Includi le credenziali per la richiesta
+        credentials: "include",
       });
-
       if (!response.ok) {
         throw new Error("Errore nella cancellazione del parrucchiere");
       }
-
-      fetchBarbers(); // Aggiorna la lista dei parrucchieri
+      fetchBarbers();
     } catch (error) {
       console.error(
         "Errore durante la cancellazione del parrucchiere:",
@@ -68,28 +60,25 @@ const BackOffice = () => {
     }
   };
 
-  // Funzione per aggiornare un parrucchiere
   const handleUpdateBarber = async (id, updatedBarber) => {
     try {
       const response = await fetch(`http://localhost:8000/barbers/${id}`, {
-        method: "PUT", // Metodo della richiesta PUT
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRF-TOKEN": csrfToken, // Imposta il token CSRF nell'header della richiesta
+          "X-CSRF-TOKEN": csrfToken,
         },
         body: JSON.stringify({
-          name: updatedBarber.name, // Aggiorna il nome del parrucchiere
-          description: updatedBarber.description, // Aggiorna la descrizione del parrucchiere
+          name: updatedBarber.name,
+          description: updatedBarber.description,
         }),
-        credentials: "include", // Includi le credenziali per la richiesta
+        credentials: "include",
       });
-
       if (!response.ok) {
         throw new Error("Errore nell'aggiornamento del parrucchiere");
       }
-
-      fetchBarbers(); // Aggiorna la lista dei parrucchieri
-      setEditingBarber(null); // Resetta lo stato di modifica del parrucchiere
+      fetchBarbers();
+      setEditingBarber(null);
     } catch (error) {
       console.error(
         "Errore durante l'aggiornamento del parrucchiere:",
@@ -98,14 +87,12 @@ const BackOffice = () => {
     }
   };
 
-  // Funzione per iniziare la modifica di un parrucchiere
   const startEditing = (barber) => {
-    setEditingBarber(barber); // Imposta il parrucchiere da modificare nello stato
+    setEditingBarber(barber);
   };
 
-  // Funzione per annullare la modifica del parrucchiere
   const cancelEditing = () => {
-    setEditingBarber(null); // Resetta lo stato di modifica del parrucchiere
+    setEditingBarber(null);
   };
 
   return (
@@ -115,39 +102,39 @@ const BackOffice = () => {
           <h1 className="text-center font-weight-bold fs-1 text-white mt-5">
             BACK OFFICE
           </h1>
-          <BarberForm onBarberAdded={handleBarberAdded} />{" "}
-          {/* Componente BarberForm per aggiungere nuovi parrucchieri */}
+          <BarberForm onBarberAdded={handleBarberAdded} />
           <h2 className="mt-4 text-center text-white fs-1 mb-5">
             Lista Parrucchieri
           </h2>
-          <div className="row">
+          <div className="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4 mb-5">
             {barbers.map((barber) => (
-              <div key={barber.id} className="col-md-4 mb-3 g-appo-form">
-                <div className="card box-shadow-2 g-form mb-4 mx-2">
+              <div key={barber.id} className="col mb-5">
+                <div className="card h-100 g-card-a box-shadow-2 mx-2">
                   <img
                     src={`http://localhost:8000${barber.photo}`}
-                    className="card-img-top"
+                    className="card-img-top-a"
                     alt={barber.name}
                   />
-                  <div className="card-body bg-color">
+                  <div className="card-body-a bg-color d-flex">
                     <h5 className="card-title text-center">{barber.name}</h5>
                     <p className="card-text text-dark text-center">
                       {barber.description}
                     </p>
-                    <div className="card-actions">
-                      <button
-                        className="btn btn-primary shadow-button mx-1"
-                        onClick={() => startEditing(barber)}
-                      >
-                        MODIFICA
-                      </button>
-                      <button
-                        className="btn btn-danger shadow-button"
-                        onClick={() => handleDeleteBarber(barber.id)}
-                      >
-                        ELIMINA
-                      </button>
-                    </div>
+                  </div>
+
+                  <div className="card-actions bg-secondary">
+                    <button
+                      className="btn btn-primary shadow-button mx-1"
+                      onClick={() => startEditing(barber)}
+                    >
+                      MODIFICA
+                    </button>
+                    <button
+                      className="btn btn-danger shadow-button"
+                      onClick={() => handleDeleteBarber(barber.id)}
+                    >
+                      ELIMINA
+                    </button>
                   </div>
                 </div>
               </div>
@@ -234,7 +221,7 @@ const BackOffice = () => {
           )}
         </div>
       </div>
-      <Footer /> {/* Componente Footer */}
+      <Footer />
     </>
   );
 };

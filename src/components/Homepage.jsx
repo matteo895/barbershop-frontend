@@ -43,12 +43,12 @@ const Homepage = () => {
         </div>
 
         <div className="container section-2 py-5">
-          <h3 className="text-style  mb-4 text-center text-white">
+          <h3 className="text-style  mb-5 text-center text-white">
             Hair Style
           </h3>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center mb-3">
             <div className="col-md-4 home-cent">
-              <div className="card-c mb-4 box-shadow">
+              <div className="card-c mb-4 box-shadow mx-3">
                 <div className="photo">
                   <Link to="/AppointmentForm">
                     <img
@@ -58,18 +58,18 @@ const Homepage = () => {
                     />
                   </Link>
                 </div>
-                <div className="card-body ">
+                <div className="card-body my-2 mx-2 ">
                   <h5 className="card-title text-center text-dark mt-3">
                     STILE CLASSICO
                   </h5>
-                  <p className="card-text text-center text-dark">
+                  <p className="card-text text-center text-dark ">
                     Un look intramontabile per ogni occasione.
                   </p>
                 </div>
               </div>
             </div>
             <div className="col-md-4 home-cent">
-              <div className="card-c   box-shadow">
+              <div className="card-c   box-shadow mx-3">
                 <div className="photo">
                   <Link to="/AppointmentForm">
                     <img
@@ -79,7 +79,7 @@ const Homepage = () => {
                     />
                   </Link>
                 </div>
-                <div className="card-body">
+                <div className="card-body my-2 mx-2">
                   <h5 className="card-title text-center text-dark mt-3">
                     STILE MODERNO
                   </h5>
@@ -90,7 +90,7 @@ const Homepage = () => {
               </div>
             </div>
             <div className="col-md-4 home-cent">
-              <div className="card-c box-shadow">
+              <div className="card-c box-shadow mx-3">
                 <div className="photo">
                   <Link to="/AppointmentForm">
                     <img
@@ -100,7 +100,7 @@ const Homepage = () => {
                     />
                   </Link>
                 </div>
-                <div className="card-body">
+                <div className="card-body my-2 mx-2">
                   <h5 className="card-title text-center text-dark mt-3">
                     STILE CREATIVO
                   </h5>

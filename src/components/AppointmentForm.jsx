@@ -287,30 +287,29 @@ const AppointmentForm = () => {
           )}
 
           <div className="mt-4">
-            <div className="row">
+            <div className="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4 mb-5  ">
               {barbers.map((barber) => (
-                <div className="col-md-4 g-appo-form" key={barber.id}>
-                  <div className="card mb-5 mt-2 g-form box-shadow-2 mx-1">
+                <div key={barber.id} className="col mb-5">
+                  <div className="card h-100 g-card-a box-shadow-2 mx-2 ">
                     <img
-                      src={barber.photo}
-                      className="card-img-top"
+                      src={`http://localhost:8000${barber.photo}`}
+                      className="card-img-top-a"
                       alt={barber.name}
                     />
-                    <div className="card-body bg-color">
-                      <h5 className="card-title text-black text-center">
-                        {barber.name}
-                      </h5>
+                    <div className="card-body-a bg-color d-flex">
+                      <h5 className="card-title text-center">{barber.name}</h5>
                       <p className="card-text text-dark text-center">
                         {barber.description}
                       </p>
-                      <div className="d-flex justify-content-center">
-                        <button
-                          className="btn btn-primary shadow-button"
-                          onClick={() => setSelectedBarber(barber)}
-                        >
-                          SCEGLI : {barber.name}
-                        </button>
-                      </div>
+                    </div>
+
+                    <div className="card-actions-c bg-secondary">
+                      <button
+                        className="btn btn-primary shadow-button px-5"
+                        onClick={() => setSelectedBarber(barber)}
+                      >
+                        SCEGLI
+                      </button>
                     </div>
                   </div>
                 </div>

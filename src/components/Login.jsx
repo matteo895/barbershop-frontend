@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Login = ({ onLogin, logoutSuccess }) => {
   const [email, setEmail] = useState("");
@@ -47,7 +48,7 @@ const Login = ({ onLogin, logoutSuccess }) => {
           <div className="row justify-content-center">
             <div className="col-lg-5 col-md-8">
               <div className="card-login  rounded-lg my-5">
-                <div className="card-body p-5 ">
+                <div className=" p-5 ">
                   <h3 className="text-center mb-4 text-white">LOGIN</h3>
                   {logoutSuccess && (
                     <p className="text-success">
@@ -109,6 +110,7 @@ const Login = ({ onLogin, logoutSuccess }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ const Register = () => {
           <div className="row justify-content-center">
             <div className="col-lg-5 col-md-8">
               <div className="card-login rounded-lg my-5">
-                <div className="card-body p-5">
+                <div className=" p-5">
                   <h3 className="text-center mb-4 text-white">REGISTRATI</h3>
                   <form onSubmit={handleRegister}>
                     {registerError && (
@@ -90,6 +91,7 @@ const Register = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
