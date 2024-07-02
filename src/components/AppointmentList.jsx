@@ -5,21 +5,32 @@ import AppointmentFormModal from "./AppointmentFormModal";
 import { isTimeAlreadyBooked } from "./AppointmentUtils";
 import Footer from "./Footer";
 
+// Componente principale per la gestione della lista delle prenotazioni
 const AppointmentList = () => {
+  // Stato per memorizzare le prenotazioni
   const [appointments, setAppointments] = useState([]);
+  // Stato per memorizzare il token CSRF
   const [csrfToken, setCsrfToken] = useState("");
+  // Stato per gestire la visibilità della modale di conferma eliminazione
   const [showModal, setShowModal] = useState(false);
+  // Stato per gestire la visibilità della modale di modifica appuntamento
   const [showEditModal, setShowEditModal] = useState(false);
+  // Stato per memorizzare l'appuntamento selezionato
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  // Stato per memorizzare i messaggi di successo
   const [successMessage, setSuccessMessage] = useState("");
+  // Stato per memorizzare i messaggi di errore
   const [errorMessage, setErrorMessage] = useState("");
+  // Stato per gestire la visibilità della modale del form di appuntamento
   const [showFormModal, setShowFormModal] = useState(false);
 
+  // Effetto per recuperare le prenotazioni e il token CSRF al montaggio del componente
   useEffect(() => {
     fetchAppointments();
     fetchCSRFToken();
   }, []);
 
+  // Funzione per recuperare il token CSRF dal server
   const fetchCSRFToken = async () => {
     try {
       const response = await fetch("http://localhost:8000/csrf-token", {
@@ -32,6 +43,7 @@ const AppointmentList = () => {
     }
   };
 
+  // Funzione per recuperare le prenotazioni dal server
   const fetchAppointments = async () => {
     try {
       const response = await fetch("http://localhost:8000/appointments");
@@ -42,6 +54,7 @@ const AppointmentList = () => {
     }
   };
 
+  // Funzione per gestire l'eliminazione di un appuntamento
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`http://localhost:8000/appointments/${id}`, {
@@ -69,12 +82,14 @@ const AppointmentList = () => {
     }
   };
 
+  // Funzione per gestire l'aggiornamento di un appuntamento
   const handleUpdateAppointment = async (updatedAppointment) => {
     try {
       if (!selectedAppointment) {
         throw new Error("Nessun appuntamento selezionato");
       }
 
+      // Controllo se l'orario è già prenotato
       if (
         isTimeAlreadyBooked(
           appointments,
@@ -126,6 +141,7 @@ const AppointmentList = () => {
     }
   };
 
+  // Funzione per mostrare un messaggio di successo
   const showSuccessMessage = (message) => {
     setSuccessMessage(message);
     setTimeout(() => {
@@ -133,6 +149,7 @@ const AppointmentList = () => {
     }, 5000);
   };
 
+  // Funzione per mostrare un messaggio di errore
   const showErrorMessage = (message) => {
     setErrorMessage(message);
     setTimeout(() => {
@@ -140,6 +157,7 @@ const AppointmentList = () => {
     }, 5000);
   };
 
+  // Funzione per formattare la data
   const formatDate = (dateString) => {
     const options = {
       weekday: "long",
@@ -150,25 +168,25 @@ const AppointmentList = () => {
     return new Date(dateString).toLocaleDateString("it-IT", options);
   };
 
+  // Funzione per chiudere la modale di conferma eliminazione
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedAppointment(null);
   };
 
+  // Funzione per mostrare la modale di conferma eliminazione
   const handleShowModal = (appointment) => {
     setSelectedAppointment(appointment);
     setShowModal(true);
   };
 
+  // Funzione per mostrare la modale di modifica appuntamento
   const handleShowEditModal = (appointment) => {
     setSelectedAppointment(appointment);
     setShowEditModal(true);
   };
 
-  // const handleShowFormModal = () => {
-  //  setShowFormModal(true);
-  // };
-
+  // Funzione per chiudere la modale del form di appuntamento
   const handleCloseFormModal = () => {
     setShowFormModal(false);
   };

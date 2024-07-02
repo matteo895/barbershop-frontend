@@ -1,24 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import del hook useNavigate per la navigazione
 import AppointmentFormModal from "./AppointmentFormModal";
 import Footer from "./Footer";
 
+// Definizione del componente AppointmentForm
 const AppointmentForm = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Utilizzo del hook useNavigate per la navigazione tra le pagine
 
-  const [barbers, setBarbers] = useState([]);
-  const [selectedBarber, setSelectedBarber] = useState(null);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [csrfToken, setCsrfToken] = useState("");
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  // Definizione degli stati utilizzati nel componente
+  const [barbers, setBarbers] = useState([]); // Stato per memorizzare la lista dei parrucchieri
+  const [selectedBarber, setSelectedBarber] = useState(null); // Stato per memorizzare il parrucchiere selezionato
+  const [date, setDate] = useState(""); // Stato per memorizzare la data dell'appuntamento
+  const [time, setTime] = useState(""); // Stato per memorizzare l'ora dell'appuntamento
+  const [csrfToken, setCsrfToken] = useState(""); // Stato per memorizzare il token CSRF
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth()); // Stato per memorizzare il mese corrente
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear()); // Stato per memorizzare l'anno corrente
   const [modal, setModal] = useState({
+    // Stato per gestire la modale di conferma/errore
     show: false,
     title: "",
     message: "",
   });
 
+  // Array di orari disponibili
   const times = [
     "08:30",
     "09:30",
@@ -32,36 +36,41 @@ const AppointmentForm = () => {
     "19:30",
   ];
 
+  // Effetto per caricare i parrucchieri e il token CSRF al montaggio del componente
   useEffect(() => {
-    fetchBarbers();
-    fetchCSRFToken();
+    fetchBarbers(); // Chiamata alla funzione per caricare i parrucchieri
+    fetchCSRFToken(); // Chiamata alla funzione per caricare il token CSRF
   }, []);
 
+  // Funzione asincrona per recuperare i parrucchieri dal server
   const fetchBarbers = async () => {
     try {
-      const response = await fetch("http://localhost:8000/barbers");
-      const data = await response.json();
-      setBarbers(data);
+      const response = await fetch("http://localhost:8000/barbers"); // Richiesta GET per ottenere i parrucchieri
+      const data = await response.json(); // Estrae i dati JSON dalla risposta
+      setBarbers(data); // Imposta i parrucchieri nello stato
     } catch (error) {
-      console.error("Errore nel recupero dei parrucchieri:", error.message);
+      console.error("Errore nel recupero dei parrucchieri:", error.message); // Gestione degli errori
     }
   };
 
+  // Funzione asincrona per recuperare il token CSRF dal server
   const fetchCSRFToken = async () => {
     try {
       const response = await fetch("http://localhost:8000/csrf-token", {
-        credentials: "include",
+        credentials: "include", // Specifica che include le credenziali nella richiesta
       });
-      const data = await response.json();
-      setCsrfToken(data.csrfToken);
+      const data = await response.json(); // Estrae i dati JSON dalla risposta
+      setCsrfToken(data.csrfToken); // Imposta il token CSRF nello stato
     } catch (error) {
-      console.error("Errore nel recupero del token CSRF:", error.message);
+      console.error("Errore nel recupero del token CSRF:", error.message); // Gestione degli errori
     }
   };
 
+  // Funzione per gestire la sottomissione del form di prenotazione
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Previeni il comportamento predefinito del form
 
+    // Verifica se l'ora selezionata è già prenotata
     if (isTimeAlreadyBooked(date, time)) {
       setModal({
         show: true,
@@ -72,36 +81,39 @@ const AppointmentForm = () => {
       return;
     }
 
+    // Creazione di un nuovo appuntamento
     const newAppointment = {
-      user_id: 1,
-      barber_id: selectedBarber.id,
-      name: selectedBarber.name,
-      date,
-      time,
+      user_id: 1, // ID utente fisso (per esempio)
+      barber_id: selectedBarber.id, // ID del parrucchiere selezionato
+      name: selectedBarber.name, // Nome del parrucchiere selezionato
+      date, // Data dell'appuntamento
+      time, // Ora dell'appuntamento
     };
 
     try {
       const response = await fetch("http://localhost:8000/appointments", {
-        method: "POST",
+        method: "POST", // Metodo della richiesta HTTP
         headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-TOKEN": csrfToken,
+          "Content-Type": "application/json", // Tipo di contenuto della richiesta
+          "X-CSRF-TOKEN": csrfToken, // Intestazione per il token CSRF
         },
-        body: JSON.stringify(newAppointment),
-        credentials: "include",
+        body: JSON.stringify(newAppointment), // Corpo della richiesta (dati in formato JSON)
+        credentials: "include", // Include le credenziali nella richiesta
       });
 
       if (!response.ok) {
-        throw new Error("Errore nella prenotazione dell'appuntamento");
+        throw new Error("Errore nella prenotazione dell'appuntamento"); // Gestione degli errori se la risposta non è OK
       }
 
-      const result = await response.json();
-      console.log("Appuntamento creato con successo:", result);
+      const result = await response.json(); // Estrae i dati JSON dalla risposta
+      console.log("Appuntamento creato con successo:", result); // Log di conferma
 
+      // Reset degli stati dopo la creazione dell'appuntamento
       setSelectedBarber(null);
       setDate("");
       setTime("");
 
+      // Visualizzazione di un messaggio di successo nella modale
       setModal({
         show: true,
         title: "Successo",
@@ -110,8 +122,9 @@ const AppointmentForm = () => {
 
       navigate("/AppointmentList"); // Naviga alla pagina delle prenotazioni dopo la creazione
     } catch (error) {
-      console.error("Errore durante la prenotazione:", error.message);
+      console.error("Errore durante la prenotazione:", error.message); // Gestione degli errori
 
+      // Visualizzazione di un messaggio di errore nella modale
       setModal({
         show: true,
         title: "Errore",
@@ -120,18 +133,22 @@ const AppointmentForm = () => {
     }
   };
 
+  // Funzione placeholder per verificare se un'ora è già prenotata
   const isTimeAlreadyBooked = (selectedDate, selectedTime) => {
     return false; // Placeholder per la verifica se l'ora è già prenotata
   };
 
+  // Genera i giorni del mese specificato
   const generateDaysOfMonth = (month, year) => {
     const currentDate = new Date();
     const date = new Date(year, month, 1);
     const days = [];
 
+    // Ciclo fino alla fine del mese specificato
     while (date.getMonth() === month) {
       const day = date.getDay();
       if (day >= 2 && day <= 6 && date >= currentDate) {
+        // Filtra i giorni lavorativi futuri
         const dateString = date.toISOString().split("T")[0];
         days.push({
           date: dateString,
@@ -142,16 +159,18 @@ const AppointmentForm = () => {
           }),
         });
       }
-      date.setDate(date.getDate() + 1);
+      date.setDate(date.getDate() + 1); // Incrementa la data di un giorno
     }
 
-    return days;
+    return days; // Ritorna l'array dei giorni del mese
   };
 
+  // Funzione per gestire il cambio del mese
   const handleMonthChange = (direction) => {
     let newMonth = currentMonth + direction;
     let newYear = currentYear;
 
+    // Logica per il cambio dell'anno
     if (newMonth < 0) {
       newMonth = 11;
       newYear -= 1;
@@ -160,16 +179,18 @@ const AppointmentForm = () => {
       newYear += 1;
     }
 
-    setCurrentMonth(newMonth);
-    setCurrentYear(newYear);
+    setCurrentMonth(newMonth); // Imposta il nuovo mese corrente
+    setCurrentYear(newYear); // Imposta il nuovo anno corrente
   };
 
+  // Funzione per gestire il click su un giorno
   const handleDayClick = (selectedDate) => {
     const nextDay = new Date(selectedDate);
     nextDay.setDate(nextDay.getDate() + 1);
-    setDate(nextDay.toISOString().split("T")[0]);
+    setDate(nextDay.toISOString().split("T")[0]); // Imposta la nuova data selezionata
   };
 
+  // Genera i giorni del mese corrente
   const daysOfMonth = generateDaysOfMonth(currentMonth, currentYear);
 
   return (
@@ -183,6 +204,7 @@ const AppointmentForm = () => {
             Prenota un Appuntamento
           </h2>
 
+          {/* Form per la selezione del parrucchiere e la data dell'appuntamento */}
           {selectedBarber && (
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
@@ -252,6 +274,7 @@ const AppointmentForm = () => {
                 </div>
               </div>
 
+              {/* Selezione dell'ora dell'appuntamento */}
               <div className="mb-3">
                 <label
                   htmlFor="timeInput"
@@ -275,6 +298,7 @@ const AppointmentForm = () => {
                 </select>
               </div>
 
+              {/* Pulsante per inviare il form di prenotazione */}
               <div className="button-form">
                 <button
                   type="submit"
@@ -286,6 +310,7 @@ const AppointmentForm = () => {
             </form>
           )}
 
+          {/* Visualizzazione dei parrucchieri disponibili */}
           <div className="mt-4">
             <div className="row row-cols-1 row-cols-xl-3 row-cols-md-2 g-4 mb-5  ">
               {barbers.map((barber) => (
@@ -307,6 +332,7 @@ const AppointmentForm = () => {
                       </p>
                     </div>
 
+                    {/* Pulsante per selezionare il parrucchiere */}
                     <div className="card-actions-c bg-secondary">
                       <button
                         className="btn btn-primary shadow-button px-5"
@@ -321,6 +347,7 @@ const AppointmentForm = () => {
             </div>
           </div>
 
+          {/* Modale per mostrare i messaggi di conferma/errore */}
           <AppointmentFormModal
             show={modal.show}
             handleClose={() => setModal({ ...modal, show: false })}
@@ -329,9 +356,9 @@ const AppointmentForm = () => {
           />
         </div>
       </div>
-      <Footer />
+      <Footer /> {/* Componente Footer per il footer della pagina */}
     </>
   );
 };
 
-export default AppointmentForm;
+export default AppointmentForm; // Esporta il componente AppointmentForm
